@@ -2,62 +2,72 @@ using namespace std;
 
 #include <iostream>
  
-void printCombination(int arr[], int n, int k, int idxCurArr,
-                      int data[], int idxCurData)
+int sizeSet;
+int *set;
+int sizeGrp;
+int *data;
+
+void
+processCombination (void)
+{
+
+    for (int j=0; j<sizeGrp; j++) {
+        cout << data[j] << " ";
+    }
+    cout << endl;
+    
+    return;
+}
+
+void combine(int set[], int sizeSet, int sizeGrp, int idxSet, int data[], int idxData)
 {
     // Current cobination is ready, print it
-    if (idxCurData == k)
+    if (idxData == sizeGrp)
     {
-        for (int j=0; j<k; j++)
-            cout << data[j] << " ";
-        cout << endl;
-
+        processCombination();
         return;
     }
  
     // When no more elements are there to put in data[]
-    if (idxCurArr >= n)
+    if (idxSet >= sizeSet) {
         return;
+    }
  
     // current is included, put next at next location
-    data[idxCurData] = arr[idxCurArr];
-    printCombination(arr, n, k, idxCurArr+1, data, idxCurData+1);
+    data[idxData] = set[idxSet];
+    combine(set, sizeSet, sizeGrp, idxSet+1, data, idxData+1);
  
     // current is excluded, replace it with next (Note that
     // i+1 is passed, but index is not changed)
-    printCombination(arr, n, k, idxCurArr+1, data, idxCurData);
+    combine(set, sizeSet, sizeGrp, idxSet+1, data, idxData);
 }
  
 int
 main (int argc, char *argv[])
 {
-    int n;
-    int *arr;
-    int k;
-    int *data;
+	cout << "Enter the size of the array : ";
+	cin >> sizeSet;
 
-	  cout << "Enter the size of the array : ";
-	  cin >> n;
+	set = new int[sizeSet];
+	data = new int[sizeGrp];
 
-	  arr = new int[n];
-	  data = new int[k];
-
-	  cout << "Enter the elements of the array : " << endl;
-	  for (int i = 0; i < n; i++) {
-	  	cout << "element-" <<  " : ";
-	  	cin >> arr[i];
-	  }	
+	cout << "Enter the elements of the array : " << endl;
+	for (int i = 0; i < sizeSet; i++) {
+		cout << "element-" <<  i << " : ";
+		cin >> set[i];
+	}	
 
     cout << "Input Array is : [";
-    for (int j=0; j<n; j++) {
-        cout << arr[j] << " ";
+    for (int j=0; j<sizeSet; j++) {
+        cout << set[j] << " ";
     }
     cout << "]" << endl;
 
     while (1) {
-      cout << "Enter the value of 'k' i.e. group size : ";
-      cin >> k;
-      printCombination(arr, n, k, 0, data, 0);
+      cout << "Enter the value of 'sizeGrp' i.e. group size : ";
+      cin >> sizeGrp;
+      int idxSet = 0, idxData = 0;
+      combine(set, sizeSet, sizeGrp, idxSet, data, idxData);
       cout << "-----------------------------------------" << endl;
     }
 

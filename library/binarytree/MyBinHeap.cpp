@@ -1,183 +1,161 @@
 
 #include "MyBinHeap.hpp"
 
-MyTreeNode *
-MyBinHeap::insert_helper (int value)
+int
+getMin (void)
 {
-	MyTreeNode *ptrNode;
-	MyQueueNode *ptrQueueHead;
-    MyTreeNode *ptrQueueHeadTreeNode;
-
-	if (this->Tsize == 0) {
-		cout << "Inserting first tree node" << endl;
-		ptrNode = new MyTreeNode(value);
-		ptrQueue->enque(ptrNode);
-		this->ptrRoot = ptrNode;
-		this->Tsize++;
-		return (ptrNode);
-	}
-
-	ptrQueueHead = this->ptrQueue->peek();
-	if (ptrQueueHead) {
-  		ptrQueueHeadTreeNode = ptrQueueHead->ptrDataTreeNode;
-	}
-	if (ptrQueueHeadTreeNode) {
-		if (!ptrQueueHeadTreeNode->ptrLeft) {
-		  	ptrNode = new MyTreeNode(value);
-		  	ptrQueueHeadTreeNode->ptrLeft = ptrNode;
-    		this->Tsize++;
-			this->ptrQueue->enque(ptrNode);
-		} else if (!ptrQueueHeadTreeNode->ptrRight) {
-			ptrNode = new MyTreeNode(value);
-			ptrQueueHeadTreeNode->ptrRight = ptrNode;
-        	this->Tsize++;
-			this->ptrQueue->enque(ptrNode);
-			this->ptrQueue->deque();
-		}
-	}
-
-	return (ptrNode);
+    return (this->ptrRoot->data);
 }
+
+int
+extractMin (void)
+{
+    int retVal;
+    uint sizeVecAdj = this->vecHeapNode.size() - 1;
+
+    retVal = this->ptrRoot->data;
+    this->vecHeapNode[0] = this->vecHeap[sizeVecAdj];
+    this->vecHeapNode.erase(this->vecHeap.begin() + sizeVecAdj); 
+    this->buildMinHeap(0)
+    for (int i = (vecSize/2-1); i >= 0; i--) {
+        buildMinHeap(i);
+    }
+
+    return (retVal);
+}
+
+                            // --------------------------
+                            //
+                            //     HEAP USING ARRAY
+                            //
+                            // --------------------------
 
 void
-MyBinHeap::insert (int value)
+MyBinHeap::buildMinHeap (uint i)
 {
-	insert_helper(value);
-}
+	uint idxLeft = (2*i + 1);
+	uint idxRight = (2*i + 2);
+	uint idxSmall;
 
-MyTreeNode *
-MyBinHeap::buildHeap_helper (int i)
-{
-    MyTreeNode *ptrSubRoot = NULL;
-    int idxLeft, idxRight;
-    
-    if (i < this->Asize) {
- 		idxLeft = (2*i + 1);
- 		idxRight = (2*i + 2);
- 		ptrSubRoot = new MyTreeNode(ptrArr[i]);
- 		if (i == 0) {
- 			this->ptrRoot = ptrSubRoot;
- 		}
-    } else {
-		cout << "ERROR: " << "array index out-of-bound" << endl;
-		return NULL;
-    }
-   
-    if ((idxLeft != 0) && (idxLeft < this->Asize)) {
-   		ptrSubRoot->ptrLeft = buildHeap_helper(idxLeft);
-    }
-
-    if ((idxRight != 0) && (idxRight < this->Asize)) {
-   		ptrSubRoot->ptrRight = buildHeap_helper(idxRight);
-    }
-   
-    return (ptrSubRoot);
-}
-
-MyTreeNode *
-MyBinHeap::buildHeapFromArray (int arrInput[], int arrSize)
-{
-	MyTreeNode *ptrRetNode = NULL;
-
-	// First copy the input array into object's array
-	this->Asize = arrSize;
-	for (int i = 0; i < arrSize; i++) {
-		this->ptrArr[i] = arrInput[i];
-	}
-	
-	// Now build a Heap/CompleteBinTree using this array
-	ptrRetNode = buildHeap_helper (0);
-
-	return (ptrRetNode);
-}
-
-MyTreeNode *
-MyBinHeap::buildMinHeap (int i)
-{
-	MyTreeNode *ptrRoot = NULL;
-	int idxLeft = (2*i + 1);
-	int idxRight = (2*i + 2);
-	int idxSmall;
-
-	if (i < this->Tsize) {
+	if (i < this->vecHeapNode.size()) {
 		idxSmall = i;
-		if ((idxLeft < this->Tsize) && (idxRight < this->Tsize)) {
-			if (this->ptrArr[idxLeft] < this->ptrArr[idxSmall]) {
+		if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeap.size())) {
+			if (this->vecHeapNode[idxLeft] < this->vecHeap[idxSmall]) {
 				idxSmall = idxLeft;
 			}
 
-			if (this->ptrArr[idxRight] < this->ptrArr[idxSmall]) {
+			if (this->vecHeapNode[idxRight] < this->vecHeap[idxSmall]) {
 				idxSmall = idxRight;
 			}
 
 			if (idxSmall != i) {
 				// Swap
-				int tmp = this->ptrArr[idxSmall];
-				this->ptrArr[idxSmall] = this->ptrArr[i];
-				this->ptrArr[i] = tmp;
+				uint tmp = this->vecHeapNode[idxSmall];
+				this->vecHeapNode[idxSmall] = this->vecHeap[i];
+				this->vecHeapNode[i] = tmp;
+                this->buildMinHeap(idxSmall);
 			}
 		}
-
-		//	Destroy the existing BinHeap
-		MyTreeUtils::destroyTree(this->ptrRoot);
-
-		ptrRoot = buildHeap_helper(0);
 	}
 	
-	return (ptrRoot);
+	return;
 }
 
-MyTreeNode *
-MyBinHeap::buildMaxHeap (int i)
+void
+MyBinHeap::buildMaxHeap (uint i)
 {
-	MyTreeNode *ptrRoot = NULL;
-	int idxLeft = (2*i + 1);
-	int idxRight = (2*i + 2);
-	int idxBig;
+	uint idxLeft = (2*i + 1);
+	uint idxRight = (2*i + 2);
+	uint idxBig;
 
-	if (i < this->Tsize) {
+	if (i < this->vecHeapNode.size()) {
 		idxBig = i;
-		if ((idxLeft < this->Tsize) && (idxRight < this->Tsize)) {
-			if (this->ptrArr[idxLeft] < this->ptrArr[idxBig]) {
-					idxBig = idxLeft;
+		if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeap.size())) {
+			if (this->vecHeapNode[idxLeft] > this->vecHeap[idxBig]) {
+				idxBig = idxLeft;
 			}
 
-			if (this->ptrArr[idxRight] < this->ptrArr[idxBig]) {
-					idxBig = idxRight;
+			if (this->vecHeapNode[idxRight] > this->vecHeap[idxBig]) {
+				idxBig = idxRight;
 			}
 
 			if (idxBig != i) {
-					// Swap
-					int tmp = this->ptrArr[idxBig];
-					this->ptrArr[idxBig] = this->ptrArr[i];
-					this->ptrArr[i] = tmp;
+				// Swap
+				uint tmp = this->vecHeapNode[idxBig];
+				this->vecHeapNode[idxBig] = this->vecHeap[i];
+				this->vecHeapNode[i] = tmp;
+                this->buildMaxHeap(idxBig);
 			}
 		}
-
-		//	Destroy the existing BinHeap
-		MyTreeUtils::destroyTree(this->ptrRoot);
-
-		//	Build the new BinHeap using re-organised array	
-		ptrRoot = buildHeap_helper(0);
 	}
 	
-	return (ptrRoot);
+	return;
 }
 
 MyTreeNode *
-MyBinHeap::heapifyUsingArray (HEAP_TYPE_T type)
-{ 
-	MyTreeNode *ptrNode;
+MyBinHeap::buildHeap (uint i)
+{
+    MyTreeNode *ptrSubRoot = NULL;
+    uint idxLeft, idxRight;
+    
+    if (i < this->vecHeapNode.size()) {
+ 		idxLeft = (2*i + 1);
+ 		idxRight = (2*i + 2);
+ 		ptrSubRoot = new MyTreeNode(this->vecHeapNode[i]);
+ 		if (i == 0) {
+ 			this->ptrRoot = ptrSubRoot;
+ 		}
+    } else {
+		return NULL;
+    }
+   
+   	ptrSubRoot->ptrLeft = buildHeap(idxLeft);
 
-	if (type == MINHEAP) {
-		for (int i = (this->Tsize/2 -1); i >= 0; i--) {
-	 		ptrNode = buildMinHeap(i);
-		}
-	} else if (type == MAXHEAP) {
-		for (int i = (this->Tsize/2 -1); i >= 0; i--) {
-			ptrNode = buildMaxHeap(i);
-		}
-	}
+   	ptrSubRoot->ptrRight = buildHeap(idxRight);
+   
+    return (ptrSubRoot);
+}
 
-	return (ptrNode);
+MyTreeNode *
+MyBinHeap::buildHeapFromArray (uint arr[], uint arrSize, HEAP_TYPE_T type)
+{
+	MyTreeNode *ptrRetNode = NULL;
+	MyTreeNode *ptrNode = NULL;
+
+    if (!this->isBuiltFromArray) {
+	    // First copy the input array into heap's vector
+        for (uint i = 0; i < arrSize; i++) {
+            ptrNode = new MyTreeNode
+            this->vecHeapNode.push_back(arr[i]);
+        }
+        this->isBuiltFromArray = true;
+    }
+
+    uint vecSize = this->vecHeapNode.size();
+    switch (type) {
+    case NONE:
+        // build the heap
+	    ptrRetNode = buildHeap (0);
+        break;
+    case MINHEAP:
+        // re-arragne the vector elements
+        for (int i = (vecSize/2-1); i >= 0; i--) {
+            buildMinHeap(i);
+        }
+        // build the heap
+        ptrRetNode = buildHeap(0);
+        break;
+    case MAXHEAP:
+        // re-arragne the vector elements
+        for (int i = (vecSize/2-1); i >= 0; i--) {
+            buildMaxHeap(i);
+        }
+        // build the heap
+        ptrRetNode = buildHeap(0);
+        break;
+    default:
+        break;
+    }
+
+	return (ptrRetNode);
 }

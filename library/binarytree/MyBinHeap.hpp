@@ -7,20 +7,18 @@
 //  A BinHeap is a complete binary tree with some ordering property
 //  like minHeap or maxHeap
 //
-
-
-
-
-
-
+//
 using namespace std;
 
 #include <iostream>
 #include <cstddef>
+#include <queue>
+#include <vector>
 
-#include "MyQueueTreeNode.hpp"
 #include "MyTreeNode.hpp"
 #include "MyTreeUtils.hpp"
+
+typedef unsigned int uint;
 
 enum HEAP_TYPE_T
 {
@@ -32,17 +30,23 @@ enum HEAP_TYPE_T
 class MyBinHeap
 {
 	public:
-		int Tsize;
+		uint Tsize;
 		MyTreeNode *ptrRoot;
-		MyQueue *ptrQueue;
-		int Asize;
-		int ptrArr[];
 
 	private:
-        MyTreeNode * insert_helper (int value);
-		MyTreeNode * buildHeap_helper (int i);
-        MyTreeNode * buildMaxHeap (int i);
-        MyTreeNode * buildMinHeap (int i);
+        // Auxiliary Queue for Heap
+        queue<MyTreeNode *> qHeap;
+        bool isBuiltFromQueue;
+
+        // Auxiliary Array for Heap
+	    vector<MyTreeNode *> vecHeapNode;
+        bool isBuiltFromArray;
+
+        // Helper methods
+        MyTreeNode * insert_helper (uint value);
+		MyTreeNode * buildHeap (uint i);
+        void buildMaxHeap (uint i);
+        void buildMinHeap (uint i);
 
 	public:
 		//
@@ -52,7 +56,8 @@ class MyBinHeap
 		{
 			this->Tsize = 0;
 			this->ptrRoot = NULL;
-			this->ptrQueue = new MyQueue();
+            this->isBuiltFromQueue = false;
+            this->isBuiltFromArray = false;
 		}
 
 		//
@@ -68,7 +73,7 @@ class MyBinHeap
 		//	(which is a Complete Binary Tree) using Queue.
 		//
 		void
-		insert (int value);
+		insert (uint value);
 
 		//
 		//	Method to insert an integer value into the BinHeap
@@ -77,21 +82,14 @@ class MyBinHeap
 		//	operations.
 		//
 		MyTreeNode *
-		insertAndRetAddr (int value);
+		insertAndRetAddr (uint value);
 
 		//
 		//	Method to build a BinHeap (which is a Complete Binary
 		//	Tree) from a given array.
 		//
 		MyTreeNode *
-		buildHeapFromArray (int arrInput[], int arrSize);
-
-    //
-    //  Method to either make a min-heap or max-heap. It assumes
-    //  that the BinHeap has an associated array for it.
-    //
-    MyTreeNode *
-    heapifyUsingArray (HEAP_TYPE_T type);
+		buildHeapFromArray (uint arr[], uint arrSize, HEAP_TYPE_T type);
 
 };
 

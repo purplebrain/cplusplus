@@ -3,7 +3,8 @@ using namespace std;
 #include <iostream>
 
 int *set;
-int n;
+int sizeSet;
+int sizeGrp;
 
 void swap (int p, int q)
 {
@@ -18,19 +19,21 @@ void
 printPermutation (int r)
 {
 	cout << endl;
-	for (int i = (r-n+1); i <= r; i++) {
+	for (int i = (r-sizeGrp+1); i <= r; i++) {
 		cout << set[i] << " ";
 	}
+
+    return;
 }
 
 void
 permute (int l, int r)
 {
-	if (l == r) {
+	if ((r-l+1) == sizeGrp) {
 		// process the constraint
-		printPermutation(r);
+		printPermutation(l+sizeGrp-1);
 	} else {
-	    for (int i = l; i <= r; i++) {
+	    for (int i = l; i < (l+sizeGrp); i++) {
 	    	// swap
 	    	swap(l, i);
 
@@ -49,17 +52,18 @@ int
 main (int argc, char *argv[])
 {
 	cout << "Enter the size of the array : ";
-	cin >> n;
-
-	set = new int[n];
-
+	cin >> sizeSet;
+	set = new int[sizeSet];
 	cout << "Enter the elements of the array : " << endl;
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < sizeSet; i++) {
 		cout << "element-" <<  " : ";
 		cin >> set[i];
 	}	
 
-	permute (0, (n-1));
+	cout << "Enter the size of group : ";
+	cin >> sizeGrp;
+
+	permute(0, (sizeSet-1));
 	
 	cout << endl;
 	return (0);
