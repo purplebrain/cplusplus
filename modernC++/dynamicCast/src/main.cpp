@@ -9,15 +9,15 @@ public:
     int val;
     Base():val(3)
     {
-        cout << "\nBase ctor called\n";
+        cout << "Base ctor called\n";
     }
     virtual void show()
     { 
-        cout << "\nBase virtual show called\n";
+        cout << "Base virtual show called\n";
     }
     void getValue()
     {
-        cout << "\nBase getValue : " << val << "\n";
+        cout << "Base getValue : " << val << "\n";
     }
 };
 
@@ -27,20 +27,21 @@ public:
     int dval;
     Derived():dval(33)
     {
-        cout << "\nDerived ctor called\n";
+        cout << "Derived ctor called\n";
     }
     void show()
     {
-        cout << "\nDerived virtual show called\n";
+        cout << "Derived virtual show called\n";
     }
     void getDvalue()
     {
-        cout << "\nDerived getDvalue : " << dval << "\n";
+        cout << "Derived getDvalue : " << dval << "\n";
     }
 };
 
 void someGlobalFunction1(Base* bPtr)
 {
+		cout << "---------------------------------------------";
     cout << "\ntypeid(bPtr).name : " << typeid(bPtr).name();
     cout << "\ntypeid(*bPtr).name : " << typeid(*bPtr).name();
     cout << "\ntypeid(Base).name : " << typeid(Base).name();
@@ -49,24 +50,24 @@ void someGlobalFunction1(Base* bPtr)
     // A derived type is not considered the same type as any of its base classes.
     if (typeid(Base) == typeid(*bPtr))
     {
-        cout << "\nBase vs Derived typeid(bPtr) == typeid(*bPtr) is true\n";
+        cout << "Base vs Derived typeid(bPtr) == typeid(*bPtr) is true\n";
     }
     else
     {
-        cout << "\nBase vs Derived typeid(bPtr) == typeid(*bPtr) is false\n";
+        cout << "Base vs Derived typeid(bPtr) == typeid(*bPtr) is false\n";
     }
 
     Derived *ptr = dynamic_cast<Derived*>(bPtr);
     if (ptr != NULL)
     {
-        cout << "\nBase ptr had a complete derived object, dynamic_cast is successful\n";
+        cout << "Base ptr had a complete derived object, dynamic_cast is successful\n";
         ptr->show();
         ptr->getDvalue();
         ptr->getValue();
     }
     else
     {
-        cout << "\nBase ptr did not point to a complete Derived object .. only base functions are called\n";
+        cout << "Base ptr did not point to a complete Derived object .. only base functions are called\n";
         bPtr->show();
         bPtr->getValue();
     }
