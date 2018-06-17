@@ -50,6 +50,7 @@ main (int argc, char *argv[])
 {
 	cout << "Enter the size of the array : ";
 	cin >> n;
+	int adjLen = (n - 1);
 
 	set = new int[n];
 
@@ -59,7 +60,7 @@ main (int argc, char *argv[])
 		cin >> set[i];
 	}	
 
-	permute (0, (n-1));
+	permute (0, adjLen);
 	
 	cout << endl;
 	return (0);
