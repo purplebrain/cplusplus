@@ -19,7 +19,7 @@ main (int argc, char *argv[])
         if (type.compare("quit") == 0) {
             break;
         } else {
-            ptrVehicle = dpFACTORY_VEHICLE::getInstance()->createVehicle(type);
+            ptrVehicle = dpFactoryVEHICLE::getInstance()->createVehicle(type);
         }
  
         if (ptrVehicle) {

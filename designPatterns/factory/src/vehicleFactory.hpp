@@ -12,28 +12,28 @@ using namespace std;
 
 typedef VEHICLE * (*ptrFunc)(void);
 
-class dpFACTORY_VEHICLE
+class dpFactoryVEHICLE
 {
     public:
-        static dpFACTORY_VEHICLE *ptrFactory;
+        static dpFactoryVEHICLE *ptrFactory;
     private:
         map<string, ptrFunc> *ptrMapRegistry;
 
     public:
         // < CONSTRUCTOR : ver#0 >
-        dpFACTORY_VEHICLE();
+        dpFactoryVEHICLE();
 
         // < COPY CONSTRUCTOR >
-        dpFACTORY_VEHICLE(const dpFACTORY_VEHICLE&);
+        dpFactoryVEHICLE(const dpFactoryVEHICLE&);
 
         // < COPY ASSIGNMENT OPERATOR >
-        dpFACTORY_VEHICLE& operator=(const dpFACTORY_VEHICLE&);
+        dpFactoryVEHICLE& operator=(const dpFactoryVEHICLE&);
 
         // < DESTRUCTOR >>
-        ~dpFACTORY_VEHICLE();
+        ~dpFactoryVEHICLE();
         
         // < METHODS >
-        static dpFACTORY_VEHICLE * getInstance(void);
+        static dpFactoryVEHICLE * getInstance(void);
         void registration(string type, ptrFunc);
         VEHICLE * createVehicle(string type);
 };
