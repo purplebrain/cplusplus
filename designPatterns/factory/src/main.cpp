@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "vehicleFactory.hpp"
+#include "vehicle.hpp"
 
 int
 main (int argc, char *argv[])

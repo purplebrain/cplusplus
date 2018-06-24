@@ -7,8 +7,6 @@ using namespace std;
 #include <string>
 #include <map>
 #include "vehicle.hpp"
-#include "car.hpp"
-#include "truck.hpp"
 
 typedef VEHICLE * (*ptrFunc)(void);
 
@@ -17,7 +15,7 @@ class dpFactoryVEHICLE
     public:
         static dpFactoryVEHICLE *ptrFactory;
     private:
-        map<string, ptrFunc> *ptrMapRegistry;
+        static map<string, ptrFunc> *ptrMapRegistry;
 
     public:
         // < CONSTRUCTOR : ver#0 >
@@ -34,8 +32,7 @@ class dpFactoryVEHICLE
         
         // < METHODS >
         static dpFactoryVEHICLE * getInstance(void);
-        void registration(string type, ptrFunc);
-        VEHICLE * createVehicle(string type);
+        static VEHICLE * createVehicle(string type);
 };
 
 #endif

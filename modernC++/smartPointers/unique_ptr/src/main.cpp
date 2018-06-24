@@ -18,10 +18,12 @@ main (int argc, char *argv[])
     BASE A(real, img);   
     A.printContent();
 
-    //unique_ptr<BASE> uptrBase(new BASE(10, 120));
-		unique_ptr<BASE> uptrBase1 = make_unique<BASE>(10, 120);
-
+    unique_ptr<BASE> uptrBase1(new BASE(10, 120));
+		cout << "uptrBase contains raw-ptr : " << uptrBase1.get() << endl;
+		//unique_ptr<BASE> uptrBase1 = make_unique<BASE>(10, 120);
     unique_ptr<BASE> uptrBase2 = move(uptrBase1);
+		//unique_ptr<BASE> uptrBase2(new BASE(10, 120));
+		cout << "uptrBase contains raw-ptr : " << uptrBase2.get() << endl;
 
     if (*uptrBase2 == A) {
         cout << "Equal" << endl;

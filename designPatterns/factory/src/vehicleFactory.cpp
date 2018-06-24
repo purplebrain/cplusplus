@@ -1,12 +1,15 @@
 #include "vehicleFactory.hpp"
+#include "car.hpp"
+#include "truck.hpp"
 
 dpFactoryVEHICLE * dpFactoryVEHICLE::ptrFactory = NULL;
+map<string, ptrFunc> *dpFactoryVEHICLE::ptrMapRegistry = NULL;
 
 dpFactoryVEHICLE::dpFactoryVEHICLE()
 {
     ptrMapRegistry = new map<string, ptrFunc>;
-    registration("car", CAR::createCar);
-    registration("truck", TRUCK::createTruck);
+    (*ptrMapRegistry)["car"] = CAR::createCar;
+    (*ptrMapRegistry)["truck"] = TRUCK::createTruck;
 }
 
 dpFactoryVEHICLE::dpFactoryVEHICLE(const dpFactoryVEHICLE& rhs)
@@ -33,12 +36,6 @@ dpFactoryVEHICLE::getInstance(void)
    }
 
    return (ptrFactory);
-}
-
-void
-dpFactoryVEHICLE::registration(string type, ptrFunc func)
-{
-    (*ptrMapRegistry)[type] = func;
 }
 
 VEHICLE * 
