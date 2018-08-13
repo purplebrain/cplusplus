@@ -1,23 +1,12 @@
 #ifndef __MY_TREE_UTILS_HPP
 #define __MY_TREE_UTILS_HPP
 
-//
-//  < DESCRIPTION >
-//
-//	This file consists of the utils needed by binary tree
-//	retlated applications
-//
-
-
-
-
-
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
-
+#include <cstdlib>
 #include "MyTreeNode.hpp"
+
+using namespace std;
 
 #define INT_MIN 0
 #define INT_MAX 101

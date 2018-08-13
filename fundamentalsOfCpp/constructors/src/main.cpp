@@ -10,10 +10,10 @@ class BASE
         int b;
         char *ptrBuffer;
     public:
-        BASE();
-        BASE(int _a, int _b);
-        BASE(const BASE& master);
-        BASE& operator=(const BASE& rhs);
+        BASE();														// 	default constructor
+        BASE(int _a, int _b);							//	parameterized constructor
+        BASE(const BASE& master);					//	copy constructor
+        BASE& operator=(const BASE& rhs);	//	copy assignment operator
         ~BASE();
         friend int main(int argc, char *argv[]);
 };
