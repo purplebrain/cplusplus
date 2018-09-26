@@ -7,8 +7,8 @@ using namespace std;
 class BASE
 {
 	private:
-    int *ptrArrElements;
-    int numElements;
+    int *m_ptrArrElements;
+    int m_size;
 		string m_name;
 
 	public:

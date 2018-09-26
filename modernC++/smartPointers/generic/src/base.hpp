@@ -12,14 +12,15 @@ class BASE
 {
   // special members
   public:
+		// constructor & destructor
     BASE();
     BASE(int _size);
     BASE(int _size, string _name);
     ~BASE();
-
+		// copy-semantics
     BASE(const BASE& rhs);
     BASE& operator=(const BASE& rhs);
-
+		// move-semantics
     BASE(BASE&& rhs);
     BASE& operator=(BASE&& rhs);
 

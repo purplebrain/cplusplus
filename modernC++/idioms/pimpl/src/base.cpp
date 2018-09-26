@@ -8,23 +8,21 @@ BASE::BASE()
 }
 
 BASE::BASE(int _size)
-//BASE::BASE(int _size) : pimpl(new Impl(_size))
 {
   cout << "BASE->Constructor#2" << endl;
   this->pimpl = make_unique<Impl>(Impl(_size));
   for (int i = 0; i < _size; i++) {
-    pimpl->m_arr[i] = i;
+    this->pimpl->m_arr[i] = i;
   }
 }
 
 BASE::~BASE()
 {
   cout << "BASE->Destructor" << endl;
-  delete [] pimpl->m_arr;
+  //delete [] this->pimpl->m_arr;
 }
 
 BASE::BASE(const BASE& rhs)
-//BASE::BASE(const BASE& rhs) : pimpl(new Impl(*rhs.pimpl))
 {
   cout << "BASE->CopyConstructor" << endl; 
   this->pimpl = make_unique<Impl>(Impl(*rhs.pimpl));
@@ -35,11 +33,9 @@ BASE::operator=(const BASE& rhs)
 {
   cout << "BASE->AssignmentOperator" << endl; 
   if (this != &rhs) {
-    delete [] pimpl->m_arr;
-    pimpl->m_size = 0;
-    pimpl = make_unique<Impl>(*rhs.pimpl);
-  } else {
-    return (*this);
+    delete [] this->pimpl->m_arr;
+    this->pimpl->m_size = 0;
+    this->pimpl = make_unique<Impl>(*rhs.pimpl);
   }
   return (*this);
 }

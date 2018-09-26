@@ -31,10 +31,13 @@ BASE
 gum(void)
 {
 	cout << "entry gum()" << endl;
-	//BASE x = BASE(5);
-	cout << "exit gum()" << endl;
+
+	BASE x = BASE(5, "tmpGum()");
 	//return (move(x));
-	return (BASE(10));
+
+	cout << "exit gum()" << endl;
+	//return (BASE(10));
+	return (x);
 }
 
 int
@@ -43,24 +46,24 @@ main (int argc, char *argv[])
 	// 1
 	cout << endl;
 	cout << "< 1 >" << endl;
-	BASE a;
+	BASE a(4, "A");
 	a.printGrp();
 
 	// 2
 	cout << endl;
 	cout << "< 2 >" << endl;
-	BASE b(8);
+	BASE b(2, "B");
 	b.printGrp();
 
 	// 3
 	cout << endl;
 	cout << "< 3 >" << endl;
-	BASE(8).printGrp();
+	BASE(4, "tmp3").printGrp();
 
 	// 4
 	cout << endl;
 	cout << "< 4 >" << endl;
-	foo(BASE(4)).printGrp();
+	foo(BASE(8, "tmp4")).printGrp();
 
 	// 5
 	cout << endl;
@@ -70,7 +73,7 @@ main (int argc, char *argv[])
 	// 6 (??)
 	cout << endl;
 	cout << "< 6 >" << endl;
-	BASE z = BASE(4);
+	BASE z = BASE(16, "tmp6");
 	z.printGrp();
 
 	// 7
@@ -88,14 +91,14 @@ main (int argc, char *argv[])
 	// 9
 	cout << endl;
 	cout << "< 9 >" << endl;
-	BASE r = BASE(3); // This is same as --> BASE r(3);
+	BASE r = BASE(10, "tmp9"); // This is same as --> BASE r(3);
 	r = bar(r);
 	r.printGrp();
 
 	// 10
 	cout << endl;
 	cout << "< 10 >" << endl;
-	BASE&& nRef = move(BASE(5)); // At the end of this expression, 
+	BASE&& nRef = move(BASE(11, "tmp10")); // At the end of this expression, 
 															 // destructor will be called. But
 															 //	it has no effect, since the object
 															 // is already moved.
@@ -104,8 +107,7 @@ main (int argc, char *argv[])
 	// 11
 	cout << endl;
 	cout << "< 11 >" << endl;
-	BASE m(gum());	//	This is as good as 
-									//	BASE m(BASE(10)) i.e. m(10)
+	BASE m(gum());
 	m.printGrp();
 
 	// 12

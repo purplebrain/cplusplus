@@ -6,9 +6,10 @@
  *  ---------------
  */
 
-BASE::BASE(int count)
+BASE::BASE(int count, string _name)
 {
   cout << "Constructor#1" << endl;
+  this->m_name = _name;
 
   if ((count == -1) || (count == 0)) {
     this->ptrArrElements = nullptr;
@@ -97,7 +98,8 @@ BASE::operator=(BASE&& rhs)
 
 BASE::~BASE()
 {
-  cout << "Destructor" << endl;
+  cout << "Destructor : " << this->m_name << " Size = " << 
+                                             this->numElements << endl;
 
   delete [] this->ptrArrElements;
 }
