@@ -4,8 +4,8 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../../../utils/ 				\
-	       -I$(PWD)/../../../../library/binarytree/ 	\
+INCLUDES = 	-I$(PWD)/../../library/utils/ 				\
+	       		-I$(PWD)/../../library/binarytree/ 	\
 
 # Library file path
 #LIB += $(PWD)/../../utils/MyTreeUtils.cpp

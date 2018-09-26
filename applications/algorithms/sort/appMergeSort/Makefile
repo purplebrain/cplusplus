@@ -4,11 +4,11 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../utils/ 				\
-		   -I$(PWD)/../../library/logger/ 		\
-	       -I$(PWD)/../../library/binarytree/ 	\
-	       -I$(PWD)/../../library/stack/ 		\
-	       -I$(PWD)/../../library/queue/ 		\
+INCLUDES = -I$(PWD)/../../library/utils/ 				\
+		       -I$(PWD)/../../library/logger/ 		\
+	         -I$(PWD)/../../library/binarytree/ 	\
+	         -I$(PWD)/../../library/stack/ 		\
+	         -I$(PWD)/../../library/queue/ 		\
 
 # Library file path
 LIB += $(PWD)/../../utils/MyPrintUtils.cpp
