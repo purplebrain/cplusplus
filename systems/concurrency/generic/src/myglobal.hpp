@@ -32,27 +32,31 @@ class MY_GLOBAL
     T m_data;
     // synchronization primitives
     mutex m_mutex_data;
+    unique_lock<mutex> uLock_data;
 };
 
 template <class T>
 MY_GLOBAL<T>::MY_GLOBAL(T _data)
 {
   this->m_data = _data;
+  uLock_data = unique_lock<mutex>(this->m_mutex_data);
 }
 
 template <class T>
 void
 MY_GLOBAL<T>::set(T _data)
 {
-  unique_lock<mutex> uLock_data(this->m_mutex_data);
+  uLock_data.lock();
   this->m_data = _data;
+  uLock_data.unlock();
 }
 
 template <class T>
 T
 MY_GLOBAL<T>::get(void)
 {
-  unique_lock<mutex> uLock_data(this->m_mutex_data);
+  //unique_lock<mutex> uLock_data(this->m_mutex_data);
+  //uLock_data.lock();
   return (this->m_data);
 }
 

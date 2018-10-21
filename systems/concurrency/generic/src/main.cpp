@@ -33,8 +33,7 @@ class QMONITOR
     {
       // _x is the size of queue when warning should be issued
       while (1) {
-        cout << "<Monitoring> current operation count = " <<
-                g_ptrQ->getOperationCnt() << endl;
+        cout << "<Monitoring> current operation count = " << g_ptrQ->getOperationCnt() << endl;
 
         if (g_ptrQ->getOperationCnt() >= MAX_OPERATIONS) {
           g_ExitRun.set(true);
