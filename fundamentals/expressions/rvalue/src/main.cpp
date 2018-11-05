@@ -16,7 +16,7 @@ class Fraction
     {
     }
    
-    friend std::ostream& operator<<(std::ostream& out, const Fraction &f1)
+    friend ostream& operator<<(ostream& out, const Fraction& f1)
     {
       out << f1.m_numerator << "/" << f1.m_denominator;
       return out;
@@ -62,10 +62,10 @@ main (int argc, char *argv[])
    *  Lambda expression
    */
  
-  std::cout << Fraction(4, 8) << '\n';
+  cout << Fraction(4, 8) << '\n';
 
   Fraction &&rref = Fraction(3, 5); // r-value reference to temporary Fraction
-  std::cout << rref << '\n';
+  cout << rref << '\n';
  
   // rref (and the temporary Fraction) goes out of scope here
 

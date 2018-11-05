@@ -4,8 +4,11 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../../../utils/ 				\
-	       -I$(PWD)/../../../../library/binarytree/ 	\
+INCLUDES = -I$(PWD)/../../utils/ 				\
+	       -I$(PWD)/../../library/binarytree/ 	\
+	       -I$(PWD)/../../library/linkedlist/ 	\
+	       -I$(PWD)/../../library/queue/ 	\
+	       -I$(PWD)/../../library/stack/ 	\
 
 # Library file path
 #LIB += $(PWD)/../../utils/MyTreeUtils.cpp
@@ -13,6 +16,7 @@ INCLUDES = -I$(PWD)/../../../../utils/ 				\
 # Source file path
 SRC_PATH :=$(PWD)/src
 SRC += $(SRC_PATH)/main.cpp
+SRC += $(SRC_PATH)/base.cpp
 
 # Object file path
 OBJ_PATH :=$(PWD)/obj
@@ -21,7 +25,7 @@ OBJ += $(patsubst %.cpp, %.o, $(SRC))
 
 EXEC = $(bin)
 CXX = g++
-CXXFLAGS = -Wall -g -v $(INCLUDES)
+CXXFLAGS = -std=c++1y -Wall -g -v $(INCLUDES)
 
 $(EXEC): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(EXEC)

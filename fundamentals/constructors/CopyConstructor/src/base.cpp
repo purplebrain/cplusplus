@@ -1,22 +1,4 @@
-#include <iostream>
-#include <cstring>
-
-using namespace std;
-
-class BASE
-{
-    private:
-        int a;
-        int b;
-        char *ptrBuffer;
-    public:
-        BASE();														// 	default constructor
-        BASE(int _a, int _b);							//	parameterized constructor
-        BASE(const BASE& master);					//	copy constructor
-        BASE& operator=(const BASE& rhs);	//	copy assignment operator
-        ~BASE();
-        friend int main(int argc, char *argv[]);
-};
+#include "base.hpp"
 
 BASE::BASE() 
 {
@@ -56,17 +38,7 @@ BASE::operator=(const BASE& rhs)
     this->ptrBuffer = new char[(this->a + this->b)];
     memcpy(this->ptrBuffer, rhs.ptrBuffer, (rhs.a + rhs.b));
 
-    /*
-    tmp.a = rhs.a;
-    //tmp.b = rhs.b;
-    tmp.b = 512;
-    if (tmp.ptrBuffer) {
-        delete (tmp.ptrBuffer);
-    }
-    tmp.ptrBuffer = new char[(tmp.a + tmp.b)];
-    memcpy(tmp.ptrBuffer, rhs.ptrBuffer, (rhs.a + rhs.b));
-    return (tmp);
-    */
+    return (*this); 
 }
 
 BASE::~BASE()
@@ -75,19 +47,3 @@ BASE::~BASE()
     delete (this->ptrBuffer);
 }
 
-int
-main (int argc, char *argv[])
-{
-    BASE *ptrBase1 = new BASE(2, 2);
-    BASE *ptrBase2 = new BASE(4, 12);
-    BASE A(*ptrBase1);
-    BASE B(*ptrBase2);
-
-    BASE C = *ptrBase1;
-    C = A;
-
-    BASE D;
-    D = *ptrBase2;
-
-    return (0);
-}

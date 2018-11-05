@@ -2,30 +2,11 @@
 #include <cstring>
 #include <string>
 
+#include "base.hpp"
+
 using namespace std;
 
 int globalVar1 = 0;
-
-class BASE
-{
-	public:
-		int a;
-		int b;
-	public:
-		BASE(int _a, int _b) : a(_a), b(_b) {}
-		~BASE() {}
-		BASE& operator=(const BASE& rhs);
-
-};
-
-BASE&
-BASE::operator=(const BASE& rhs)
-{
-	this->a = rhs.a;
-	this->b = rhs.b;
-
-	return (*this);
-}
 
 int
 foo1 (int a)
@@ -44,19 +25,26 @@ int
 main (int argc, char *argv[])
 {
 	/*
+   *	TEST #1
    *	Variable name is Lvalue
    */
+	cout << endl;
+	cout << "Test #1" << endl;
 	cout << "Address of GlobalVar : " << &globalVar1 << endl;
 	cout << "GlobalVar1 : " << globalVar1 << endl;
 
 	/*
    *	Function name is a Lvalue
    */
+	cout << endl;
+	cout << "Test #2" << endl;
 	cout << "Address of function foo1 : " << &foo1 << endl;
 
 	/*
    *	Function-call expression that returns a LvalueReference is a Lvalue
    */
+	cout << endl;
+	cout << "Test #3" << endl;
 	cout << "Return value of foo2 : " << foo2(5) << endl;
 	cout << "Address of expr foo2(5) : " << &foo2(5) << endl;
 	foo2(5) = 10;
@@ -66,6 +54,8 @@ main (int argc, char *argv[])
   /*
    *  Overloaded Operator expression with return type Lvalue
    */
+	cout << endl;
+	cout << "Test #4" << endl;
 	BASE base1(3, 4);
 	BASE base2(5, 6);
 	cout << "Address of overloaded operator expr : " << &(base2 = base1) << endl;
@@ -74,6 +64,8 @@ main (int argc, char *argv[])
 	/*
    *	Built-in assignment expression is Lvalue
    */
+	cout << endl;
+	cout << "Test #5" << endl;
 	int i = 5;
 	int j = 6;
 	(i = j) = 10;
@@ -84,6 +76,8 @@ main (int argc, char *argv[])
 	/*
    *	Built-in compound assignment expression is Lvalue
    */
+	cout << endl;
+	cout << "Test #6" << endl;
 	int a = 5;
 	int b = 6;
 	(a += b) = 10;
@@ -94,6 +88,8 @@ main (int argc, char *argv[])
 	/*
    *	Built-in pre increment/decrement expression is Lvalue
    */ 
+	cout << endl;
+	cout << "Test #7" << endl;
 	int c = 5;
 	--c = 10;
 	cout << "c = " << c << endl;
@@ -104,6 +100,8 @@ main (int argc, char *argv[])
    *		-->	can be assigned a non-modifiable Lvalue
    *		-->	can be modified using the above two
    */
+	cout << endl;
+	cout << "Test #8" << endl;
 	int z = 3;
 	const int const_z = 5;
 	int& x = z;
@@ -116,6 +114,8 @@ main (int argc, char *argv[])
    *		--> can be assigned a Rvalue
    *		--> cannot be modified
 	 */
+	cout << endl;
+	cout << "Test #9" << endl;
 	int p = 3;
 	const int const_p = 5;
 	const int& q = p;
@@ -128,6 +128,8 @@ main (int argc, char *argv[])
 	 *		-->	can be assigned a Rvalue only
    *		-->	can be modified using a Rvalue only
    */
+	cout << endl;
+	cout << "Test #10" << endl;
 	int d = 5;
 	int& e = d;
 	cout << "e = " << e << endl;
