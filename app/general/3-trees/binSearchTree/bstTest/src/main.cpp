@@ -1,5 +1,3 @@
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 #include <string>
@@ -7,6 +5,8 @@ using namespace std;
 
 #include "MyTreeUtils.hpp"
 #include "MyBinSearchTree.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])
@@ -43,9 +43,21 @@ main (int argc, char *argv[])
 		cout << "No min-node" << endl;
 	}
 	
+	if (MyTreeUtils::isBinSearchTree(myBst.ptrRoot)) {
+		cout << "Tree is a BST using algo-1" << endl;
+	} else {
+		cout << "Tree not a BST using algo-1" << endl;
+	}
+
+	if (MyTreeUtils::isBST(myBst.ptrRoot)) {
+		cout << "Tree is a BST using algo-2" << endl;
+	} else {
+		cout << "Tree not a BST using algo-2" << endl;
+	}
+
 	while (1) {
-	    cout << "Enter integer value to be deleted, 'treedump' to display current tree" << endl;
-	    cin >> inputStr;
+	  cout << "Enter integer value to be deleted, 'treedump' to display current tree" << endl;
+	  cin >> inputStr;
 		if (!inputStr.compare("treedump")) {
 			MyTreeUtils::print_in_order(myBst.ptrRoot);
 			cout << "Do you want to exit?[y/n]" << endl;

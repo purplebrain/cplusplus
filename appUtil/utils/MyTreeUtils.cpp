@@ -66,11 +66,11 @@ MyTreeUtils::getHeight (MyTreeNode *ptrRoot)
 MyTreeNode *
 MyTreeUtils::getMinNodeInBst (MyTreeNode *ptrCurrent)
 {
-    MyTreeNode *ptrNode = NULL;
-
     if (!ptrCurrent) {
         return NULL;
     }
+
+    MyTreeNode *ptrNode = NULL;
 
     ptrNode = ptrCurrent;
 
@@ -91,11 +91,11 @@ MyTreeUtils::getMinNodeInBst (MyTreeNode *ptrCurrent)
 MyTreeNode *
 MyTreeUtils::getMaxNodeInBst (MyTreeNode *ptrCurrent)
 {
-    MyTreeNode *ptrNode = NULL;
-
     if (!ptrCurrent) {
         return NULL;
     }
+
+    MyTreeNode *ptrNode = NULL;
 
     ptrNode = ptrCurrent;
 
@@ -119,14 +119,16 @@ MyTreeUtils::sumOfTree (MyTreeNode *ptrNode)
     int sumLeft, sumRight;
     int retVal;
 
-    if (isLeafNode(ptrNode)) {
+    if (!ptrNode) {
+      return (0);
+    } else if (isLeafNode(ptrNode)) {
         return (ptrNode->data);
     }
 
     // Traverse left
     sumLeft = sumOfTree(ptrNode->ptrLeft);
 
-    // Traverse left
+    // Traverse right
     sumRight = sumOfTree(ptrNode->ptrRight);
 
     // Process root
@@ -191,7 +193,9 @@ MyTreeUtils::destroyTree_helper (MyTreeNode *ptrSubRoot)
     }
 
     //  Destroy root
-   delete ptrSubRoot;
+    delete ptrSubRoot;
+
+    return;
 }
 
 void
@@ -252,6 +256,27 @@ MyTreeUtils::isBinSearchTree (MyTreeNode *ptrRoot)
 	return retVal;
 }
 
+bool
+MyTreeUtils::isBST (MyTreeNode *ptrNode)
+{
+	bool retVal;
+
+  if (!ptrNode) {
+    return true;
+  } else if (ptrNode->ptrLeft->data >= ptrNode->data) {
+    return false;
+  } else if (ptrNode->ptrRight->data <= ptrNode->data) {
+    return false;
+  }
+
+  if (isBST(ptrNode->ptrLeft) && isBST(ptrNode->ptrRight)) {
+    retVal = true;    
+  } else {
+    retVal = false;
+  }
+
+	return retVal;
+}
 
                     /* 
                      *  ----------------------

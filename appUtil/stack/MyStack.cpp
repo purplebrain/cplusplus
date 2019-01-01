@@ -1,5 +1,6 @@
-
 #include "MyStack.hpp"
+
+using namespace std;
 
 template <typename T>
 MyStack<T>::MyStack () 
@@ -36,7 +37,7 @@ MyStack<T>::push (T value)
 {
   MyStackNode<T> *ptrNode = new MyStackNode<T>(value);
   if (!ptrNode) {
-    LIB_ERR(STACK, "%s", "could not allocate StackNode");
+    cout << "could not allocate StackNode" << endl;
   }
 
   ptrNode->ptrNext = ptrTOS;
@@ -54,7 +55,7 @@ MyStack<T>::pop()
 
   // Sanity check
   if (!this->size) {
-    LIB_LOG(STACK, "%s", "Stack is empty, nothing to pop.");
+    cout << "Stack is empty, nothing to pop." << endl;
     return NULL;
   }
 
@@ -72,7 +73,7 @@ MyStack<T>::dump()
   MyStackNode<T> *ptrTmp;
 
   if (!this->size) {
-      LIB_LOG(STACK, "%s", "Stack is empty, nothing to dump.");
+      cout << "Stack is empty, nothing to dump." << endl;
   } else {
       ptrTmp = ptrTOS;
       for (int i = 1; i <= this->size; i++) {

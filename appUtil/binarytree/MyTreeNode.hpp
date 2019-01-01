@@ -31,11 +31,11 @@ class MyTreeNode
 
 			// Copy Semantics
 			MyTreeNode(const MyTreeNode&) =default;
-			MyTreeNode& MyTreeNode(const MyTreeNode&) =default;
+			MyTreeNode& operator=(const MyTreeNode&) =default;
 
 			// Move Semantics
 			MyTreeNode(MyTreeNode&&) =default;
-			MyTreeNode& MyTreeNode(MyTreeNode&&) =default;
+			MyTreeNode& operator=(MyTreeNode&&) =default;
 };
 
 #endif // __MY_TREE_NODE_HPP

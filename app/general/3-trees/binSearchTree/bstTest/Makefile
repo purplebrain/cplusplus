@@ -4,16 +4,16 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../../../utils/ 				\
-		   -I$(PWD)/../../../../library/linkedlist \
-		   -I$(PWD)/../../../../library/queue \
-		   -I$(PWD)/../../../../library/stack \
-		   -I$(PWD)/../../../../library/binarytree \
+INCLUDES = 	-I$(PWD)/../../../../../app_util/utils				\
+		   			-I$(PWD)/../../../../../app_util/stack 			\
+		   			-I$(PWD)/../../../../../app_util/queue 			\
+		   			-I$(PWD)/../../../../../app_util/binarytree 	\
 	       
 # Library file path
-LIB += $(PWD)/../../../../utils/MyTreeUtils.cpp
-LIB += $(PWD)/../../../../library/stack/MyStackTreeNode.cpp
-LIB += $(PWD)/../../../../library/binarytree/MyBinSearchTree.cpp
+LIB += $(PWD)/../../../../../app_util/utils/MyTreeUtils.cpp
+LIB += $(PWD)/../../../../../app_util/stack/MyStackTreeNode.cpp
+LIB += $(PWD)/../../../../../app_util/stack/MyStack.cpp
+LIB += $(PWD)/../../../../../app_util/binarytree/MyBinSearchTree.cpp
 
 # Source file path 
 SRC_PATH :=$(PWD)/src

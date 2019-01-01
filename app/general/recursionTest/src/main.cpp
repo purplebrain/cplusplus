@@ -1,4 +1,3 @@
-using namespace std;
 /*
  *  < PROBLEM DESCRIPTION >
  *  Generate the sum of first N numbers using recursion
@@ -8,6 +7,8 @@ using namespace std;
 #include <csignal>
 #include <cstdio>
 #include <iostream>
+
+using namespace std;
 
 unsigned long long *memoize_fibonacci;
 

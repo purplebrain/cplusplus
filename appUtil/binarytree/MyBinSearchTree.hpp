@@ -34,17 +34,17 @@ class MyBinSearchTree
     public:
 			int Tsize;
 			MyTreeNode *ptrRoot;
-            MyStackTreeNode stackPath4Avl;
-            MyTreeNode *ptrRecentTargetNode;
-            DeleteNodeType_t delNodeDir;
+      MyStackTreeNode stackPath4Avl;
+      MyTreeNode *ptrRecentTargetNode;
+      DeleteNodeType_t delNodeDir;
 
     private:
 			int traversalCounter;
 			MyTreeNode * insert_helper (MyTreeNode **ptrNode, int value);
 			MyTreeNode * deleteNode_helper (MyTreeNode *ptrNode, int value);
-            void balance ();
-            MyTreeNode * insert_avl_helper (MyTreeNode **ptrNode, int value, bool *isTreeInsert);
-            MyTreeNode * delete_avl_helper (MyTreeNode *ptrNode, int value);
+      void balance ();
+      MyTreeNode * insert_avl_helper (MyTreeNode **ptrNode, int value, bool *isTreeInsert);
+      MyTreeNode * delete_avl_helper (MyTreeNode *ptrNode, int value);
 
     public:
 			MyBinSearchTree ()
@@ -52,7 +52,7 @@ class MyBinSearchTree
 			    this->Tsize = 0;
 			    this->ptrRoot = NULL;
 			    this->ptrRecentTargetNode = NULL;
-				this->traversalCounter = this->Tsize;
+				  this->traversalCounter = this->Tsize;
 			}
 
 			~MyBinSearchTree () 
@@ -60,14 +60,14 @@ class MyBinSearchTree
 
 			}
 
-            // Binary Search Tree
+      // Binary Search Tree
 			void insertAndRetAddr (int value);
 			void insert (int value);
-            void deleteNode (int value);
+      void deleteNode (int value);
  
-            // Avl Tree
-            MyTreeNode * insert_avl (int value);
-            void delete_avl (int value);
+      // Avl Tree
+      MyTreeNode * insert_avl (int value);
+      void delete_avl (int value);
 };
 
 #endif // __MY_BIN_SEARCH_TREE_HPP
