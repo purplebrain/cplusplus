@@ -32,20 +32,6 @@ main (int argc, char *argv[])
 {
 	// < 0 >
 	{
-		// Here foo1()'s return value is consumed by ptrBase0. 
-		// As a result compiler will create a temporary object before 
-  	// returning from foo1(), but it will create the temporary object 
-  	// directly in the location of tmpBase1. 
-  	// As a result there is no need to destruct the temporary
-		// object. This is called RVO.
-		cout << endl;
-		cout << "< 0 >" << endl;
-		unique_ptr<BASE> ptrBase0(new BASE(foo1()));
-		ptrBase0->printABC();
-	}
-
-	// < 1 >
-	{
 		// Here foo1()'s return value is consumed by tmpBase1. 
 		// As a result compiler will create a temporary object before 
   	// returning from foo1(), but it will create the temporary object 
@@ -53,9 +39,23 @@ main (int argc, char *argv[])
   	// As a result there is no need to destruct the temporary
 		// object. This is called RVO.
 		cout << endl;
-		cout << "< 1 >" << endl;
+		cout << "< 0 >" << endl;
 		BASE tmpBase1 = foo1();
 		tmpBase1.printABC();
+	}
+
+	// < 1 >
+	{
+		// Here foo1()'s return value is consumed by ptrBase0. 
+		// As a result compiler will create a temporary object before 
+  	// returning from foo1(), but it will create the temporary object 
+  	// directly in the location pointed to by ptrBase0. 
+  	// As a result there is no need to destruct the temporary
+		// object. This is called RVO.
+		cout << endl;
+		cout << "< 1 >" << endl;
+		unique_ptr<BASE> ptrBase0(new BASE(foo1()));
+		ptrBase0->printABC();
 	}
 
 	// < 2 >
@@ -82,6 +82,9 @@ main (int argc, char *argv[])
 		cout << "< 3 >" << endl;
 		BASE tmpBase3("tmpBase3",3,5);
 		foo3(tmpBase3);
+		cout << "checkpoint #3.1" << endl;
+		//	One move is happening here
+		//	foo3(tmpBase3) = return (x)
 	}
 
 	// < 4 >
@@ -97,6 +100,10 @@ main (int argc, char *argv[])
 		BASE tmpBase4("tmpBase4",3,5);
 		BASE tmpBase4_1 = foo3(tmpBase4); // tmpBase4_1 obj will hold
 																			// tmpBase4 obj's content
+		cout << "checkpoint #4.1" << endl;
+		// 	Two Moves are happening here:
+		//	1. foo3(tmpBase4) = return (x)
+		//	2. tmpBase4_1 = foo3(tmpBase4)
 	}
 	
 	// < 5 >

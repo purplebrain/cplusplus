@@ -63,8 +63,8 @@ BASE::operator=(const BASE& rhs)
 
 BASE::BASE(BASE&& rhs)
 {
+  cout << "MoveConstructor : from " << rhs.name;
   if (&rhs != this) {
-    cout << "MoveConstructor : from " << rhs.name;
     this->name = rhs.name;
     this->a = rhs.a;
     this->b = rhs.b;

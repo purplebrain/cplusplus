@@ -16,7 +16,6 @@ INCLUDES = -I$(PWD)/../../utils/ 				\
 # Source file path
 SRC_PATH :=$(PWD)/src
 SRC += $(SRC_PATH)/main.cpp
-SRC += $(SRC_PATH)/base.cpp
 
 # Object file path
 OBJ_PATH :=$(PWD)/obj

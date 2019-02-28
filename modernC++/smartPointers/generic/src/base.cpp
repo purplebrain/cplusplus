@@ -23,7 +23,7 @@ BASE::BASE(int _size) : m_size(_size)
 
 BASE::BASE(int _size, string _name) : m_size(_size), m_name(_name)
 {
-  cout << "Constructor#2" << endl;
+  cout << "Constructor#3" << endl;
   this->m_ptrArr = (m_size ? (new int [m_size]) : nullptr);
   assert(this->m_size != 0);
   if (m_ptrArr) {

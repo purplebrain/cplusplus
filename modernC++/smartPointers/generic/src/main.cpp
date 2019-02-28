@@ -15,14 +15,12 @@ main (int argc, char *argv[])
 		// shared_ptr<>
 		// ------------
 		cout << endl;
-    auto ptrBase1 = new BASE(4, "chintu");
-    shared_ptr<BASE> sptr1(ptrBase1);
+    shared_ptr<BASE> sptr1 = make_shared<BASE>(4, "chintu");
     cout << "Shared Pointer #1 " << sptr1 << endl;
     sptr1->printDetails();
 
 		cout << endl;
-    auto ptrBase2 = new BASE(8, "pintu");
-    shared_ptr<BASE> sptr2(ptrBase2);
+    shared_ptr<BASE> sptr2 = sptr1;;
     cout << "Shared Pointer #2 " << sptr2 << endl;
     sptr2->printDetails();
 
@@ -42,6 +40,35 @@ main (int argc, char *argv[])
 		cout << "Sptr1->count = " << sptr1.use_count() << endl;
 		cout << "Sptr2->count = " << sptr2.use_count() << endl;
 		cout << "Sptr3->count = " << sptr3.use_count() << endl;
+
+		cout << "Reset Sptr3" << endl;
+		sptr3.reset();
+		cout << "printing use_count()" << endl;
+		cout << "Sptr1->count = " << sptr1.use_count() << endl;
+		cout << "Sptr2->count = " << sptr2.use_count() << endl;
+		cout << "Sptr3->count = " << sptr3.use_count() << endl;
+
+		cout << "Reset Sptr1" << endl;
+		sptr1.reset();
+		cout << "printing use_count()" << endl;
+		cout << "Sptr1->count = " << sptr1.use_count() << endl;
+		cout << "Sptr2->count = " << sptr2.use_count() << endl;
+		cout << "Sptr3->count = " << sptr3.use_count() << endl;
+
+		cout << "Reset Sptr2" << endl;
+		sptr2.reset();
+		cout << "printing use_count()" << endl;
+		cout << "Sptr1->count = " << sptr1.use_count() << endl;
+		cout << "Sptr2->count = " << sptr2.use_count() << endl;
+		cout << "Sptr3->count = " << sptr3.use_count() << endl;
+
+		cout << "Re-initializing" << endl;
+		sptr1 = make_shared<BASE>(8, "deepak");
+		cout << "printing use_count()" << endl;
+		cout << "Sptr1->count = " << sptr1.use_count() << endl;
+		cout << "Sptr2->count = " << sptr2.use_count() << endl;
+		cout << "Sptr3->count = " << sptr3.use_count() << endl;
+
 
 		// ------------
 		// weak_ptr<>

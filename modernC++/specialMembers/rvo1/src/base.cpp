@@ -46,11 +46,11 @@ BASE::BASE(BASE&& rhs)
 {
   cout << "MoveConstructor : " << rhs.name << " to " << this->name << endl;
   if (this != &rhs) {
-    this->name = rhs.name;
+    this->name = rhs.name + "-moved-rx";
     this->a = rhs.a;
     this->b = rhs.b;
     this->c = rhs.c;
-    rhs.name = "null";
+    rhs.name = rhs.name + "-moved-tx";
     rhs.a = -1;
     rhs.b = -1;
     rhs.c = -1;

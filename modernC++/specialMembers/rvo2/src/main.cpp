@@ -13,11 +13,19 @@ fooRv (void)
 int
 main (int argc, char *argv[])
 {
-  g_cnt = 0;
-  BASE x = fooRv();
+	// BLOCK-1
+	{
+		cout << "In BLOCK-1" << endl;
+  	g_cnt = 0;
+  	BASE x = fooRv();
+	}
 
-  g_cnt = 0;
-  fooRv();
+	// BLOCK-2
+	{
+		cout << "In BLOCK-2" << endl;
+  	g_cnt = 0;
+  	fooRv();
+	}
 
 	return (0);
 }
