@@ -34,19 +34,19 @@ class MyBinHeap
 		MyTreeNode *ptrRoot;
 
 	private:
-        // Auxiliary Queue for Heap
-        queue<MyTreeNode *> qHeap;
-        bool isBuiltFromQueue;
+    // Auxiliary Queue for Heap
+    queue<MyTreeNode *> qHeap;
+    bool isBuiltFromQueue;
 
-        // Auxiliary Array for Heap
-	    vector<MyTreeNode *> vecHeapNode;
-        bool isBuiltFromArray;
+    // Auxiliary Array for Heap
+	  vector<MyTreeNode *> vecHeapNode;
+    bool isBuiltFromArray;
 
-        // Helper methods
-        MyTreeNode * insert_helper (uint value);
+    // Helper methods
+    MyTreeNode * insert_helper (uint value);
 		MyTreeNode * buildHeap (uint i);
-        void buildMaxHeap (uint i);
-        void buildMinHeap (uint i);
+    void buildMaxHeap (uint i);
+    void buildMinHeap (uint i);
 
 	public:
 		//
