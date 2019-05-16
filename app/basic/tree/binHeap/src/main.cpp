@@ -1,9 +1,9 @@
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 #include "MyTreeUtils.hpp"
 #include "MyBinHeap.hpp"
+
+using namespace std;
 
 uint *arr;
 uint arrSize;

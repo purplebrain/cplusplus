@@ -7,17 +7,12 @@
 //	This file consists of all the sorting algorithms
 //
 
-
-
-
-
-
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 
-class MySearchUtils
+using namespace std;
+
+class MySearchArrayUtils
 {
     private:
         static bool binary_search_helper (int *inputArr, int idxStart, int idxEnd, int value);

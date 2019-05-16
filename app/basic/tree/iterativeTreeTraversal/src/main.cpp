@@ -1,9 +1,9 @@
-using namespace std;
-
 #include <iostream>
 #include <stack>
 
 #include "MyTreeNode.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

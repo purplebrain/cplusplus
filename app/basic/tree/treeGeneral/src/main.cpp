@@ -1,9 +1,9 @@
-using namespace std;
 #include <iostream>
 #include <cstddef>
 
-#include "MyPrintUtils.hpp"
 #include "MyTreeUtils.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

@@ -1,7 +1,7 @@
-using namespace std;
-
 #include <iostream>
  
+using namespace std;
+
 int sizeSet;
 int *set;
 int sizeGrp;

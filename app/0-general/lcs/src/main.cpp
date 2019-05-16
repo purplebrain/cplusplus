@@ -1,7 +1,9 @@
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 /* Dynamic Programming C/C++ implementation of LCS problem */
-#include<bits/stdc++.h>
   
 int max(int a, int b);
   
@@ -47,7 +49,7 @@ int main()
   int m = strlen(X);
   int n = strlen(Y);
   
-  printf("Length of LCS is %dn", lcs( X, Y, m, n ) );
+  printf("Length of LCS is %d\n", lcs( X, Y, m, n ) );
  
   return 0;
 }

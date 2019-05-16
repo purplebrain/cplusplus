@@ -1,12 +1,12 @@
 #ifndef _PARKING_HPP
 #define _PARKING_HPP
 
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include <map>
 #include "vehicle.hpp"
+
+using namespace std;
 
 typedef pair<string, VEHICLE *> _ENTRY;
 

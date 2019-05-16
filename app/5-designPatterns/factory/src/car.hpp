@@ -1,11 +1,11 @@
 #ifndef _CAR_HPP
 #define _CAR_HPP
 
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include "vehicle.hpp"
+
+using namespace std;
 
 class CAR : public VEHICLE
 {

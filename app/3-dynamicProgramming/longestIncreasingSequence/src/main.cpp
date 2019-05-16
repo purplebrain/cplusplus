@@ -1,5 +1,3 @@
-using namespace std;
-
 /*
  * The Longest Increasing Subsequence (LIS) problem is to find the 
  * length of the longest subsequence of a given sequence such that 
@@ -10,6 +8,8 @@ using namespace std;
  */
 
 #include <iostream>
+
+using namespace std;
 
 int sequence[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
 int sequenceLength;

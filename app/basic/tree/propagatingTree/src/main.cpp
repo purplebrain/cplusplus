@@ -1,11 +1,11 @@
-using namespace std;
-
 #include <iostream>
 #include <cstdlib>
 #include <string>
 
 #include "MyTreeNode.hpp"
 #include "MyBinTreeNode.hpp"
+
+using namespace std;
 
 /*
     foo (Base derived_obj)

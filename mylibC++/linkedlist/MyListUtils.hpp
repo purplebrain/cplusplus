@@ -7,17 +7,11 @@
 //	This file consists of utils required to operate on linked lists
 //
 
-
-
-
-
-
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
-
 #include "MyList.hpp"
+
+using namespace std;
 
 class MyListUtils
 {

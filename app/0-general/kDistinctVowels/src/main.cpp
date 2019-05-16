@@ -1,4 +1,3 @@
-using namespace std;
 
 /*
  * Given a string s we have to find the length of the longest 
@@ -12,7 +11,8 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <queue>
-#include <bits/stdc++.h>
+
+using namespace std;
 
 string _INPUT_STR;
 uint _K;

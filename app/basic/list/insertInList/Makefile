@@ -4,18 +4,12 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../../../utils/ 				\
-		   -I$(PWD)/../../../../library/linkedlist \
-		   -I$(PWD)/../../../../library/queue \
-		   -I$(PWD)/../../../../library/stack \
-		   -I$(PWD)/../../../../library/binarytree \
+INCLUDES = -I$(PWD)/../../../../mylibC++/linkedlist \
 	       
 # Library file path
-LIB += $(PWD)/../../../../utils/MyPrintUtils.cpp
-LIB += $(PWD)/../../../../utils/MyListUtils.cpp
-LIB += $(PWD)/../../../../library/linkedlist/MyList.cpp
-#LIB += $(PWD)/../../../../library/stack/MyStackTreeNode.cpp
-#LIB += $(PWD)/../../../../library/binarytree/MyBinSearchTree.cpp
+LIB += $(PWD)/../../../../mylibC++/linkedlist/MyPrintListUtils.cpp 
+LIB += $(PWD)/../../../../mylibC++/linkedlist/MyListUtils.cpp 
+LIB += $(PWD)/../../../../mylibC++/linkedlist/MyList.cpp 
 
 # Source file path 
 SRC_PATH :=$(PWD)/src
@@ -35,12 +29,12 @@ $(EXEC): $(OBJ)
 	mv $(OBJ) $(OBJ_PATH)
 
 all: $(OBJ)
-	$(CXX) $(INCLUDES) $(CXXFLAGS) -o $(EXEC) $(OBJ)
+	$(CXX) $(INCLUDES) $(CXXFLAGS) $(LIBS) -o $(EXEC) $(OBJ)
 	mv $(OBJ) $(OBJ_PATH)
 	@echo  Compilation successful!
 
 .c.o:
-	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $<  -o $@
+	$(CXX) $(INCLUDES) $(CXXFLAGS) $(LIBS) -c $<  -o $@
 
 clean:
 	$(RM) $(EXEC) $(OBJ_PATH)/*.o $(OBJ_PATH)/*~ *.o *~

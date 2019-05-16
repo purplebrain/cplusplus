@@ -1,10 +1,10 @@
 #ifndef _VEHICLE_HPP
 #define _VEHICLE_HPP
 
-using namespace std;
-
 #include <iostream>
 #include <string>
+
+using namespace std;
 
 class VEHICLE
 {

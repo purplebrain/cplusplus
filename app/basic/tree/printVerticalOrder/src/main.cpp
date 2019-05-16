@@ -1,11 +1,11 @@
-using namespace std;
-
 #include <iostream>
 #include <cstdlib>
 #include <cstddef>
 
 #include "MyTreeNode.hpp"
 #include "MyTreeUtils.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

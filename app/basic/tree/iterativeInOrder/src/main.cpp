@@ -1,12 +1,11 @@
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 
-#include "MyPrintUtils.hpp"
 #include "MyTreeUtils.hpp"
 #include "MyBinTree.hpp"
 #include "MyStackTreeNode.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])
@@ -134,7 +133,7 @@ main (int argc, char *argv[])
         }
         // Execute Task-3, for which Task-2 should be fully done
         if (ptrTask3) {
-            cout << ptrTask3-data << " ";
+            cout << ptrTask3->data << " ";
         }
         ptrCurTask = NULL;
 

@@ -1,6 +1,6 @@
-using namespace std;
-
 #include <iostream>
+
+using namespace std;
 
 bool
 isSubsetSum(int *arr, int n, int sum)

@@ -1,9 +1,10 @@
-using namespace std;
 #include <iostream>
 #include <cstddef>
 #include <string>
 #include "MyTreeUtils.hpp"
 #include "MyBinTree.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

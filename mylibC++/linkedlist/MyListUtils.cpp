@@ -1,4 +1,3 @@
-
 #include "MyListUtils.hpp"
 
 MyListNode *
@@ -22,5 +21,3 @@ MyListUtils::reverse_list (MyListNode *ptrListHead)
 
     return ptrListHead;
 }
-
-

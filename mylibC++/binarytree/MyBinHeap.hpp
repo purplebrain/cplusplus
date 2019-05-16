@@ -1,15 +1,6 @@
 #ifndef __MY_BIN_HEAP_HPP
 #define __MY_BIN_HEAP_HPP
 
-//
-//  < DESCRIPTION >
-//
-//  A BinHeap is a complete binary tree with some ordering property
-//  like minHeap or maxHeap
-//
-//
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 #include <queue>
@@ -17,6 +8,8 @@ using namespace std;
 
 #include "MyTreeNode.hpp"
 #include "MyTreeUtils.hpp"
+
+using namespace std;
 
 typedef unsigned int uint;
 
@@ -47,6 +40,8 @@ class MyBinHeap
 		MyTreeNode * buildHeap (uint i);
     void buildMaxHeap (uint i);
     void buildMinHeap (uint i);
+    int extractMin (void);
+    int getMin (void);
 
 	public:
 		//

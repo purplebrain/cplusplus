@@ -1,12 +1,12 @@
 #ifndef _VEHICLE_FACT_HPP
 #define _VEHICLE_FACT_HPP
 
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include <map>
 #include "vehicle.hpp"
+
+using namespace std;
 
 typedef VEHICLE * (*ptrFunc)(void);
 

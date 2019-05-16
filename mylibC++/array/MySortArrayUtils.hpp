@@ -1,5 +1,5 @@
-#ifndef __MY_SORT_UTILS_HPP
-#define __MY_SORT_UTILS_HPP
+#ifndef __MY_SORT_ARRAY_UTILS_HPP
+#define __MY_SORT_ARRAY_UTILS_HPP
 
 //
 //  < DESCRIPTION >
@@ -8,16 +8,12 @@
 //
 
 
-
-
-
-
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 
-class MySortUtils
+using namespace std;
+
+class MySortArrayUtils
 {
     private:
         static void merge_sort_conquer (int *inputArr, int idxLeft, int idxMid, int idxRight);
@@ -31,4 +27,4 @@ class MySortUtils
 
 
 
-#endif // __MY_SORT_UTILS_HPP
+#endif // __MY_SORT_ARRAY_UTILS_HPP

@@ -1,11 +1,11 @@
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include <cstdint>
 #include <cstring>
 
 #include "TwoDMatrix.hpp"
+
+using namespace std;
 
 string strSequence;
 int strLen;

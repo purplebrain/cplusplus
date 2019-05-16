@@ -1,5 +1,5 @@
 
-#include "MySearchUtils.hpp"
+#include "MySearchArrayUtils.hpp"
 
                     /* 
                      *  ----------------------
@@ -8,17 +8,15 @@
                      */
 /* 
  * -------------------------------------------------------------------------
- *  FUNCTION        MySearchUtils::binary_search ()
+ *  FUNCTION        MySearchArrayUtils::binary_search ()
  *  DESCRIPTION     This method assumes that the given array is sorted 
  *                  and searches for an element.
  * -------------------------------------------------------------------------
  */
 bool
-MySearchUtils::binary_search_helper (int *inputArr, int idxStart, int idxEnd, int value)
+MySearchArrayUtils::binary_search_helper (int *inputArr, int idxStart, int idxEnd, int value)
 {
     bool retVal = false;
-    bool retValHalf0;
-    bool retValHalf1;
     int idxMid = (idxStart + idxEnd)/2;
     
     if (value == inputArr[idxMid]) {
@@ -42,13 +40,13 @@ MySearchUtils::binary_search_helper (int *inputArr, int idxStart, int idxEnd, in
 
 /* 
  * -------------------------------------------------------------------------
- *  FUNCTION        MySearchUtils::binary_search ()
+ *  FUNCTION        MySearchArrayUtils::binary_search ()
  *  DESCRIPTION     This method assumes that the given array is sorted 
  *                  and searches for an element.
  * -------------------------------------------------------------------------
  */
 bool
-MySearchUtils::binary_search (int *inputArr, int Asize, int value)
+MySearchArrayUtils::binary_search (int *inputArr, int Asize, int value)
 {
     bool retVal = false;
     int start = 0;

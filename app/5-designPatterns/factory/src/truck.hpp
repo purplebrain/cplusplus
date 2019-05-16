@@ -1,11 +1,11 @@
 #ifndef _TRUCK_HPP
 #define _TRUCK_HPP
 
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include "vehicle.hpp"
+
+using namespace std;
 
 class TRUCK : public VEHICLE
 {

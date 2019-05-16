@@ -1,5 +1,3 @@
-using namespace std;
-
 /*
  *  < PROBLEM DESCRIPTION >
  *  This program finds if there is a subSet in the given array, whose elements
@@ -7,8 +5,9 @@ using namespace std;
  */
 
 #include <iostream>
-
 #include "TwoDMatrix.hpp"
+
+using namespace std;
 
 int inputArrSize;
 int *inputArr;

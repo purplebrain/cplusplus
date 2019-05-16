@@ -1,8 +1,8 @@
-using namespace std;
-
 #include <iostream>
 #include <cstdlib>
 #include <string>
+
+using namespace std;
 
 int sortedArr[8] = {4,7,12,18,23,27,33,45};
 int Asize = 8;

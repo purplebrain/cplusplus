@@ -1,5 +1,3 @@
-using namespace std;
-
 /*
  *  < PROBLEM DESCRIPTION >
  *  Given an array such that each array-element represents the number of jumps that can be made the next
@@ -7,8 +5,9 @@ using namespace std;
  */
 
 #include <iostream>
-
 #include "TwoDMatrix.hpp"
+
+using namespace std;
 
 int inputArrSize;
 int *inputArr;

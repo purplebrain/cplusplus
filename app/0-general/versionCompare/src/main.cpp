@@ -1,8 +1,9 @@
-using namespace std;
 
 #include <iostream>
 #include <cstddef>
 #include <cstdlib>
+
+using namespace std;
 
 #define MAX_LEN 32
 

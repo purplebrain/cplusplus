@@ -1,5 +1,3 @@
-using namespace std;
-
 /*
  *  < PROBLEM DESCRIPTION >
  *  Find a subarray in the given array such that the sum of it's elements
@@ -7,6 +5,8 @@ using namespace std;
  */
 
 #include <iostream>
+
+using namespace std;
 
 int inputArrSize;
 int *inputArr;

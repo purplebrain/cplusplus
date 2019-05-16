@@ -1,10 +1,10 @@
-using namespace std;
-
 #include <iostream>
 #include <map>
 #include <string>
 
 #include "Citizen.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

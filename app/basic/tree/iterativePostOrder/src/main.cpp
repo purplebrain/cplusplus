@@ -1,12 +1,11 @@
-using namespace std;
-
 #include <iostream>
 #include <cstddef>
 
-#include "MyPrintUtils.hpp"
 #include "MyTreeUtils.hpp"
 #include "MyBinTree.hpp"
 #include "MyStackTreeNode.hpp"
+
+using namespace std;
 
 int
 main (int argc, char *argv[])

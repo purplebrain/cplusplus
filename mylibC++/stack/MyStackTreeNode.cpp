@@ -1,4 +1,3 @@
-
 #include "MyStackTreeNode.hpp"
 
 MyStackTreeNode::MyStackTreeNode () 

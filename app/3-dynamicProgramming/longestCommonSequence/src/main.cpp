@@ -1,9 +1,9 @@
-using namespace std;
-
 #include <iostream>
-#include <bits/stdc++.h>
+#include <string>
  
 #include "TwoDMatrix.hpp"
+
+using namespace std;
 
 int result = 0;
 TwoDMatrix *memo;

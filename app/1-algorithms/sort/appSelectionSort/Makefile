@@ -4,16 +4,11 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = 	-I$(PWD)/../../library/utils/ 				\
-		   			-I$(PWD)/../../library/logger/ 		\
-	       		-I$(PWD)/../../library/linkedlist/	\
-	       		-I$(PWD)/../../library/binarytree/ 	\
-	       		-I$(PWD)/../../library/stack/ 		\
-	       		-I$(PWD)/../../library/queue/ 		\
+INCLUDES = -I$(PWD)/../../../../mylibC++/array/
 
 # Library file path
-LIB += $(PWD)/../../utils/MyPrintUtils.cpp
-LIB += $(PWD)/../../utils/MySortUtils.cpp
+LIB += $(PWD)/../../../../mylibC++/array/MyPrintArrayUtils.cpp
+LIB += $(PWD)/../../../../mylibC++/array/MySortArrayUtils.cpp
 
 # Source file path
 SRC_PATH :=$(PWD)/src

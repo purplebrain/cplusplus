@@ -1,22 +1,22 @@
-
 #include "MyBinHeap.hpp"
 
 int
-getMin (void)
+MyBinHeap::getMin (void)
 {
     return (this->ptrRoot->data);
 }
 
 int
-extractMin (void)
+MyBinHeap::extractMin (void)
 {
     int retVal;
     uint sizeVecAdj = this->vecHeapNode.size() - 1;
 
     retVal = this->ptrRoot->data;
-    this->vecHeapNode[0] = this->vecHeap[sizeVecAdj];
-    this->vecHeapNode.erase(this->vecHeap.begin() + sizeVecAdj); 
-    this->buildMinHeap(0)
+    uint vecSize = this->vecHeapNode.size();
+    this->vecHeapNode[0] = this->vecHeapNode[sizeVecAdj];
+    this->vecHeapNode.erase(this->vecHeapNode.begin() + sizeVecAdj); 
+    this->buildMinHeap(0);
     for (int i = (vecSize/2-1); i >= 0; i--) {
         buildMinHeap(i);
     }
@@ -38,24 +38,24 @@ MyBinHeap::buildMinHeap (uint i)
 	uint idxSmall;
 
 	if (i < this->vecHeapNode.size()) {
-		idxSmall = i;
-		if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeap.size())) {
-			if (this->vecHeapNode[idxLeft] < this->vecHeap[idxSmall]) {
-				idxSmall = idxLeft;
-			}
+		  idxSmall = i;
+		  if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeapNode.size())) {
+		  	  if (this->vecHeapNode[idxLeft]->data < this->vecHeapNode[idxSmall]->data) {
+		  	  	  idxSmall = idxLeft;
+		  	  }
 
-			if (this->vecHeapNode[idxRight] < this->vecHeap[idxSmall]) {
-				idxSmall = idxRight;
-			}
+		  	  if (this->vecHeapNode[idxRight]->data < this->vecHeapNode[idxSmall]->data) {
+		  	  	  idxSmall = idxRight;
+		  	  }
 
-			if (idxSmall != i) {
-				// Swap
-				uint tmp = this->vecHeapNode[idxSmall];
-				this->vecHeapNode[idxSmall] = this->vecHeap[i];
-				this->vecHeapNode[i] = tmp;
-                this->buildMinHeap(idxSmall);
-			}
-		}
+		  	  if (idxSmall != i) {
+		  	  	  // Swap
+		  	  	  uint tmp = this->vecHeapNode[idxSmall]->data;
+		  	  	  this->vecHeapNode[idxSmall]->data = this->vecHeapNode[i]->data;
+		  	  	  this->vecHeapNode[i]->data = tmp;
+              this->buildMinHeap(idxSmall);
+		  	  }
+		  }
 	}
 	
 	return;
@@ -69,24 +69,24 @@ MyBinHeap::buildMaxHeap (uint i)
 	uint idxBig;
 
 	if (i < this->vecHeapNode.size()) {
-		idxBig = i;
-		if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeap.size())) {
-			if (this->vecHeapNode[idxLeft] > this->vecHeap[idxBig]) {
-				idxBig = idxLeft;
-			}
+		  idxBig = i;
+		  if ((idxLeft < this->vecHeapNode.size()) && (idxRight < this->vecHeapNode.size())) {
+		  	  if (this->vecHeapNode[idxLeft]->data > this->vecHeapNode[idxBig]->data) {
+		  	  	  idxBig = idxLeft;
+		  	  }
 
-			if (this->vecHeapNode[idxRight] > this->vecHeap[idxBig]) {
-				idxBig = idxRight;
-			}
+		  	  if (this->vecHeapNode[idxRight]->data > this->vecHeapNode[idxBig]->data) {
+		  	  	  idxBig = idxRight;
+		  	  }
 
-			if (idxBig != i) {
-				// Swap
-				uint tmp = this->vecHeapNode[idxBig];
-				this->vecHeapNode[idxBig] = this->vecHeap[i];
-				this->vecHeapNode[i] = tmp;
-                this->buildMaxHeap(idxBig);
-			}
-		}
+		  	  if (idxBig != i) {
+		  	  	  // Swap
+		  	  	  uint tmp = this->vecHeapNode[idxBig]->data;
+		  	  	  this->vecHeapNode[idxBig]->data = this->vecHeapNode[i]->data;
+		  	  	  this->vecHeapNode[i]->data = tmp;
+              this->buildMaxHeap(idxBig);
+		  	  }
+		  }
 	}
 	
 	return;
@@ -101,7 +101,7 @@ MyBinHeap::buildHeap (uint i)
     if (i < this->vecHeapNode.size()) {
  		idxLeft = (2*i + 1);
  		idxRight = (2*i + 2);
- 		ptrSubRoot = new MyTreeNode(this->vecHeapNode[i]);
+ 		ptrSubRoot = new MyTreeNode(this->vecHeapNode[i]->data);
  		if (i == 0) {
  			this->ptrRoot = ptrSubRoot;
  		}
@@ -125,8 +125,8 @@ MyBinHeap::buildHeapFromArray (uint arr[], uint arrSize, HEAP_TYPE_T type)
     if (!this->isBuiltFromArray) {
 	    // First copy the input array into heap's vector
         for (uint i = 0; i < arrSize; i++) {
-            ptrNode = new MyTreeNode
-            this->vecHeapNode.push_back(arr[i]);
+            ptrNode = new MyTreeNode(arr[i]);
+            this->vecHeapNode.push_back(ptrNode);
         }
         this->isBuiltFromArray = true;
     }

@@ -1,5 +1,5 @@
 
-#include "MySortUtils.hpp"
+#include "MySortArrayUtils.hpp"
 
                     /* 
                      *  ----------------------
@@ -7,7 +7,7 @@
                      *  ----------------------
                      */
 void 
-MySortUtils::selection_sort  (int *inputArr, int Asize)
+MySortArrayUtils::selection_sort  (int *inputArr, int Asize)
 {
     int idxPick;
     int idxSmall;;
@@ -35,7 +35,7 @@ MySortUtils::selection_sort  (int *inputArr, int Asize)
                      *  ----------------------
                      */
 void
-MySortUtils::merge_sort_conquer (int inputArr[], int idxLeft, int idxMid, int idxRight)
+MySortArrayUtils::merge_sort_conquer (int inputArr[], int idxLeft, int idxMid, int idxRight)
 {
     int range1 = (idxMid - idxLeft + 1);
     int range2 = (idxRight - idxLeft);
@@ -81,7 +81,7 @@ MySortUtils::merge_sort_conquer (int inputArr[], int idxLeft, int idxMid, int id
 }
 
 void
-MySortUtils::merge_sort_divide (int inputArr[], int idxLeft, int idxRight)
+MySortArrayUtils::merge_sort_divide (int inputArr[], int idxLeft, int idxRight)
 {
     int mid;
 
@@ -94,12 +94,10 @@ MySortUtils::merge_sort_divide (int inputArr[], int idxLeft, int idxRight)
 }
 
 void 
-MySortUtils::merge_sort (int inputArr[], int Asize)
+MySortArrayUtils::merge_sort (int inputArr[], int Asize)
 {
     int idxLeft = 0;
     int idxRight = (Asize - 1);
 
     merge_sort_divide(inputArr, idxLeft, idxRight);
 }
-
-
