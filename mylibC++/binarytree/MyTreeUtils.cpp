@@ -108,8 +108,8 @@ MyTreeUtils::getMaxNodeInBst (MyTreeNode *ptrCurrent)
 /* 
  * -------------------------------------------------------------------------
  *  FUNCTION        MyTreeUtils::sumOfTree ()
- *  DESCRIPTION      
- *  
+ *  DESCRIPTION     This method prints the sum of the tree.   
+ *                  It follows Post-Order traversal for this purpose.
  * -------------------------------------------------------------------------
  */
 int
@@ -211,67 +211,26 @@ MyTreeUtils::destroyTree (MyTreeNode *ptrRoot)
                      *  -----------------------
                      */
 bool
-MyTreeUtils::isBinSearchTree_helper (MyTreeNode *ptrNode, int min, int max)
-{
-    bool retVal = true;
-
-    if (ptrNode->ptrLeft) {
-        if (!((min <= ptrNode->ptrLeft->data) && 
-              (ptrNode->ptrLeft->data <= ptrNode->data))) {
-           return false;
-        } else {
-            // go to next level down and check
-        }
-    } else {
-        return true;
-    }
-
-    if (ptrNode->ptrRight) {
-        if (!((ptrNode->data <= ptrNode->ptrRight->data) && 
-              (ptrNode->ptrRight->data <= max))) {
-            return false;
-        } else {
-            // go to next level down and check
-        }
-    } else {
-        return true;
-    }
-
-    if (isBinSearchTree_helper(ptrNode->ptrLeft, min, (ptrNode->data - 1)) &&
-        isBinSearchTree_helper(ptrNode->ptrRight, (ptrNode->data + 1), max)) {
-        return true;
-    } else {
-        return false;
-    }
-
-    return retVal;
-}
-
-bool
-MyTreeUtils::isBinSearchTree (MyTreeNode *ptrRoot)
-{
-	bool retVal;
-	retVal = isBinSearchTree_helper(ptrRoot, INT_MIN, INT_MAX);
-	return retVal;
-}
-
-bool
 MyTreeUtils::isBST (MyTreeNode *ptrNode)
 {
 	bool retVal;
 
+  // Process Node
   if (!ptrNode) {
-    return true;
-  } else if (ptrNode->ptrLeft->data >= ptrNode->data) {
-    return false;
-  } else if (ptrNode->ptrRight->data <= ptrNode->data) {
-    return false;
+      return true;
+  } else if (ptrNode->ptrLeft && 
+             (ptrNode->ptrLeft->data >= ptrNode->data)) {
+      return false;
+  } else if (ptrNode->ptrRight &&
+             (ptrNode->ptrRight->data <= ptrNode->data)) {
+      return false;
   }
 
+  // Process Left-Child followed by Right-Child
   if (isBST(ptrNode->ptrLeft) && isBST(ptrNode->ptrRight)) {
-    retVal = true;    
+      retVal = true;    
   } else {
-    retVal = false;
+      retVal = false;
   }
 
 	return retVal;
@@ -521,18 +480,34 @@ MyTreeUtils::print_vertical_order (MyTreeNode *ptrRoot)
     
     // Find the min-width of the tree
     ptrNode = ptrRoot;
-    int min_width = 1;
+    int min_width = 0;
     while (ptrNode) {
-        min_width--;
-        ptrNode = ptrNode->ptrLeft;
+        if (ptrNode->ptrLeft) {
+            min_width--;
+            ptrNode = ptrNode->ptrLeft;
+            continue;
+        } else if (ptrNode->ptrRight) {
+            min_width++;
+            ptrNode = ptrNode->ptrRight;
+            continue;
+        }
+        break;
     }
 
     // Find the max-width of the tree
     ptrNode = ptrRoot;
-    int max_width = -1;
+    int max_width = 0;
     while (ptrNode) {
-        max_width++;
-        ptrNode = ptrNode->ptrRight;
+        if (ptrNode->ptrRight) {
+            max_width++;
+            ptrNode = ptrNode->ptrRight;
+            continue;
+        } else if (ptrNode->ptrLeft) {
+            max_width--;
+            ptrNode = ptrNode->ptrLeft;
+            continue;
+        }
+        break;
     }
     
     cout << "Min-Width : " << min_width << endl;

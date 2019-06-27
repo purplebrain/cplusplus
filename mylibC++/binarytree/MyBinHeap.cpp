@@ -92,6 +92,7 @@ MyBinHeap::buildMaxHeap (uint i)
 	return;
 }
 
+// Build heap from vector in Pre-order fashion.
 MyTreeNode *
 MyBinHeap::buildHeap (uint i)
 {
@@ -99,14 +100,14 @@ MyBinHeap::buildHeap (uint i)
     uint idxLeft, idxRight;
     
     if (i < this->vecHeapNode.size()) {
- 		idxLeft = (2*i + 1);
- 		idxRight = (2*i + 2);
- 		ptrSubRoot = new MyTreeNode(this->vecHeapNode[i]->data);
- 		if (i == 0) {
- 			this->ptrRoot = ptrSubRoot;
- 		}
+ 		    idxLeft = (2*i + 1);
+ 		    idxRight = (2*i + 2);
+ 		    ptrSubRoot = new MyTreeNode(this->vecHeapNode[i]->data);
+ 		    if (i == 0) {
+ 		    	this->ptrRoot = ptrSubRoot;
+ 		    }
     } else {
-		return NULL;
+		    return NULL;
     }
    
    	ptrSubRoot->ptrLeft = buildHeap(idxLeft);
@@ -119,43 +120,43 @@ MyBinHeap::buildHeap (uint i)
 MyTreeNode *
 MyBinHeap::buildHeapFromArray (uint arr[], uint arrSize, HEAP_TYPE_T type)
 {
-	MyTreeNode *ptrRetNode = NULL;
+  MyTreeNode *ptrRetNode = NULL;
 	MyTreeNode *ptrNode = NULL;
 
-    if (!this->isBuiltFromArray) {
-	    // First copy the input array into heap's vector
-        for (uint i = 0; i < arrSize; i++) {
-            ptrNode = new MyTreeNode(arr[i]);
-            this->vecHeapNode.push_back(ptrNode);
-        }
-        this->isBuiltFromArray = true;
-    }
+  if (!this->isBuiltFromArray) {
+	  // First copy the input array into heap's vector
+      for (uint i = 0; i < arrSize; i++) {
+          ptrNode = new MyTreeNode(arr[i]);
+          this->vecHeapNode.push_back(ptrNode);
+      }
+      this->isBuiltFromArray = true;
+  }
 
-    uint vecSize = this->vecHeapNode.size();
-    switch (type) {
-    case NONE:
-        // build the heap
-	    ptrRetNode = buildHeap (0);
-        break;
-    case MINHEAP:
-        // re-arragne the vector elements
-        for (int i = (vecSize/2-1); i >= 0; i--) {
-            buildMinHeap(i);
-        }
-        // build the heap
-        ptrRetNode = buildHeap(0);
-        break;
-    case MAXHEAP:
-        // re-arragne the vector elements
-        for (int i = (vecSize/2-1); i >= 0; i--) {
-            buildMaxHeap(i);
-        }
-        // build the heap
-        ptrRetNode = buildHeap(0);
-        break;
-    default:
-        break;
-    }
+  uint vecSize = this->vecHeapNode.size();
+  switch (type) {
+  case NONE:
+      // build the heap
+	  ptrRetNode = buildHeap (0);
+      break;
+  case MINHEAP:
+      // re-arragne the vector elements
+      for (int i = (vecSize/2-1); i >= 0; i--) {
+          buildMinHeap(i);
+      }
+      // build the heap
+      ptrRetNode = buildHeap(0);
+      break;
+  case MAXHEAP:
+      // re-arragne the vector elements
+      for (int i = (vecSize/2-1); i >= 0; i--) {
+          buildMaxHeap(i);
+      }
+      // build the heap
+      ptrRetNode = buildHeap(0);
+      break;
+  default:
+      break;
+  }
 
 	return (ptrRetNode);
 }

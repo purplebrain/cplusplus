@@ -1,0 +1,21 @@
+
+TYPE #1 Recursive function returning a boolean value
+PSUEDO CODE 
+boolean foo_recur (args) {
+
+	rVal = false;
+
+	if (base_condition == true) {
+			return (true);
+	}
+
+	if (mandatory_condition == true) {
+			rVal = foo_recur(args);
+	}
+
+	return (rVal);
+}
+
+
+
+
