@@ -7,6 +7,7 @@ int *inputSet;
 int sizeInput;
 vector<int> vecCombination;
 int sizeGrp;
+int stats = 0;
 
 void
 processCombination (void)
@@ -20,12 +21,12 @@ processCombination (void)
     return;
 }
 
-void combinate(int inputSet[], int sizeInput, int idxInput, vector<int>& vecCombination, int sizeGrp, int idxCombo)
+void combinate(int inputSet[], int idxInput, vector<int>& vecCombination, int idxCombo)
 {
     // Current cobination is ready, print it
-    if (idxCombo == sizeGrp)
-    {
+    if (idxCombo == sizeGrp) {
         processCombination();
+			  stats++;
         return;
     }
  
@@ -36,11 +37,11 @@ void combinate(int inputSet[], int sizeInput, int idxInput, vector<int>& vecComb
  
     // current is included, put next at next location
     vecCombination[idxCombo] = inputSet[idxInput];
-    combinate(inputSet, sizeInput, idxInput+1, vecCombination, sizeGrp, idxCombo+1);
+    combinate(inputSet, idxInput+1, vecCombination, idxCombo+1);
  
     // current is excluded, replace it with next (Note that
     // i+1 is passed, but index is not changed)
-    combinate(inputSet, sizeInput, idxInput+1, vecCombination, sizeGrp, idxCombo);
+    combinate(inputSet, idxInput+1, vecCombination, idxCombo);
 }
  
 int
@@ -68,10 +69,12 @@ main (int argc, char *argv[])
     cin >> sizeGrp;
 		if (vecCombination.size()) {
 		    vecCombination.clear();
+        stats = 0;
 		}
     vecCombination.assign(sizeGrp, 0);
     int idxInput = 0, idxCombo = 0;
-    combinate(inputSet, sizeInput, idxInput, vecCombination, sizeGrp, idxCombo);
+    combinate(inputSet, idxInput, vecCombination, idxCombo);
+		cout << "STATS : " << stats << " combinations" << endl;
     cout << "-----------------------------------------" << endl;
   }
 

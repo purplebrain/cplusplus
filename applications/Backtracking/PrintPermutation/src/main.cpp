@@ -4,73 +4,92 @@
 
 using namespace std;
 
-int *inputSet;
-int sizeInput;
-bool *inputPickerSet;
-int sizeGrp;
-vector<int> vecPermutation;
-int stats = 0;
+int *gInputArr;
+int gSizeInput;
+bool *gInputPickerArr;
+int gSizeGrp;
+//vector<int> vecPermutation;
+int gStats = 0;
 
 void
-permutate (int *arrInput, bool *arrPicker, vector<int>& vecPermutation)
+processPermutation (vector<int>& vecPermutation)
+{
+    for (int j=0; j<gSizeGrp; j++) {
+        cout << vecPermutation[j] << " ";
+    }
+    cout << endl;
+
+		gStats++;
+    
+    return;
+}
+
+void
+permutate (vector<int>& vecPermutation)
 {	
-	if (vecPermutation.size() == sizeGrp) {
-		for (int i = 0; i < sizeGrp; i++) {
-			cout << " " << vecPermutation[i];
-		}
-		cout << endl;
-		stats++;
-		return;
+	if (vecPermutation.size() == gSizeGrp) {
+			processPermutation(vecPermutation);
+			return;
 	}
 
-	for (int i = 0; i < sizeInput; i++) {
-		if (!inputPickerSet[i]) {
-			inputPickerSet[i] = true;
-			vecPermutation.push_back(inputSet[i]);
-			permutate(inputSet, inputPickerSet, vecPermutation);
-			inputPickerSet[i] = false;
-			vecPermutation.pop_back();
-		}
+	for (int i = 0; i < gSizeInput; i++) {
+			if (!gInputPickerArr[i]) {
+					gInputPickerArr[i] = true;
+					vecPermutation.push_back(gInputArr[i]);
+					permutate(vecPermutation);
+					gInputPickerArr[i] = false;
+					vecPermutation.pop_back();
+			}
 	}
 
 	return;
 }
 
+void
+permutate (void)
+{
+	vector<int> vecPermutation;
+	permutate(vecPermutation);
+
+	return;
+}
 
 int
 main (int argc, char *argv[])
 {
 	cout << "Enter the size of the array : ";
-	cin >> sizeInput;
+	cin >> gSizeInput;
 
-	inputSet = new int[sizeInput];
-	inputPickerSet = new bool[sizeInput];
+	gInputArr = new int[gSizeInput];
+	gInputPickerArr = new bool[gSizeInput];
 
 	cout << "Enter the elements of the array : " << endl;
-	for (int i = 0; i < sizeInput; i++) {
+	for (int i = 0; i < gSizeInput; i++) {
 		cout << "element-" <<  i << " : ";
-		cin >> inputSet[i];
-		inputPickerSet[i] = false;
+		cin >> gInputArr[i];
+		gInputPickerArr[i] = false;
 	}	
 
-  cout << "Input Array is : [";
-  for (int j=0; j<sizeInput; j++) {
-      cout << inputSet[j] << " ";
-  }
-  cout << "]" << endl;
-
   while (1) {
-    cout << "Enter the value of 'sizeGrp' i.e. group size : ";
-    cin >> sizeGrp;
-		if (vecPermutation.size()) {
-				vecPermutation.clear();
-				for (int i = 0; i < sizeInput; i++) {
-					inputPickerSet[i] = false;
-				}	
-		}
-		permutate(inputSet, inputPickerSet, vecPermutation);
-		cout << "STATS : " << stats << " permutations" << endl;
+		cout << endl << endl;
     cout << "-----------------------------------------" << endl;
+  	cout << "Input Array is : [";
+  	for (int j=0; j<gSizeInput; j++) {
+  	    cout << gInputArr[j] << " ";
+  	}
+  	cout << "]" << endl;
+
+    cout << "Enter the value of 'gSizeGrp' i.e. group size : ";
+    cin >> gSizeGrp;
+
+		gStats = 0;
+		for (int i = 0; i < gSizeInput; i++) {
+			gInputPickerArr[i] = false;
+		}	
+
+		permutate();
+
+		cout << "STATS : " << gStats << " permutations" << endl;
   }
 
 	return 0;

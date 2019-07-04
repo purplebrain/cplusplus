@@ -3,13 +3,14 @@
 
 PWD = $(shell pwd)
 
-# Header file patha
-# (none)
-	       
-# Library file path
-# (none)
+# Header file path
+INCLUDES = -I$(PWD)/../../utils/ 				\
+	       -I$(PWD)/../../library/binarytree/ 	\
 
-# Source file path 
+# Library file path
+#LIB += $(PWD)/../../utils/MyTreeUtils.cpp
+
+# Source file path
 SRC_PATH :=$(PWD)/src
 SRC += $(SRC_PATH)/main.cpp
 
