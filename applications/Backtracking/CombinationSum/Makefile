@@ -21,7 +21,12 @@ OBJ += $(patsubst %.cpp, %.o, $(SRC))
 
 EXEC = $(bin)
 CXX = g++
-CXXFLAGS = -Wall -g -v $(INCLUDES)
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CXXFLAGS = -Wall -g -v -DDEBUG $(INCLUDES)
+else
+    CXXFLAGS = -Wall -g -v $(INCLUDES)
+endif
 
 $(EXEC): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(EXEC)

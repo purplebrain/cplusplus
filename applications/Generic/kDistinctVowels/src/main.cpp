@@ -10,155 +10,94 @@
 
 #include <iostream>
 #include <string>
-#include <queue>
+#include <vector>
+#include <set>
 
 using namespace std;
 
 string _INPUT_STR;
-uint _K;
-uint maxLength = 0;
+char *ptrInputStr;
+int _K;
 
-typedef unsigned int uint;
-typedef struct _vPos
+set<char> gSetVowels;
+
+void
+init (void)
 {
-  int lPos;
-  uint rPos;
-  char x;
-} vPos_t;
-
-#define V_SET_SIZE 5
-int vMapArr[V_SET_SIZE];
-queue<vPos_t> qVowels;
-
-
-bool
-isKDistVowels (void) 
-{
-  bool retVal = false;
-  uint cnt = 0;
-
-  for (int v=0; v < V_SET_SIZE; v++) {
-    if (vMapArr[v] != 0) {
-      cnt++;
-    }
-    if (cnt == _K) {
-      retVal = true;
-    }
-  }
-
-  return retVal;
-}
-
-int
-getVIdxInMap (char x)
-{
-  switch (x) {
-    case 'a':
-      return 0;
-      break;
-    case 'A':
-      return 0;
-      break;
-    case 'e':
-      return 1;
-      break;
-    case 'E':
-      return 1;
-      break;
-    case 'i':
-      return 2;
-      break;
-    case 'I':
-      return 2;
-      break;
-    case 'o':
-      return 3;
-      break;
-    case 'O':
-      return 3;
-      break;
-    case 'u':
-      return 4;
-      break;
-    case 'U':
-      return 4;
-      break;
-    default:
-      return (-1);
-      break;
-  }
+	gSetVowels.insert('a');
+	gSetVowels.insert('e');
+	gSetVowels.insert('i');
+	gSetVowels.insert('o');
+	gSetVowels.insert('u');
 }
 
 bool
 isVowel (char x)
 {
-  if ((x == 'a') || (x == 'A') ||
-      (x == 'e') || (x == 'E') ||
-      (x == 'i') || (x == 'I') ||
-      (x == 'o') || (x == 'O') ||
-      (x == 'u') || (x == 'U')) {
-    return true;
-  }
+	bool retVal = false;
 
-  return false;
+	if (gSetVowels.find(x) != gSetVowels.end()) {
+			retVal = true;
+	}
+
+	return (retVal);
+}
+
+int
+findKDistinctVowels (char *ptrInputStr, int inputLen, int _K)
+{
+	int retVal = 0;
+	int idxStart = 0;
+	int idxEnd = -1;	
+	vector<int> vecIdxVowels;
+	set<char> lSetVowels;
+
+	for (int i = 0; i < inputLen; i++) {
+			char x = ptrInputStr[i];
+			if (isVowel(x)) {
+					if (lSetVowels.find(x) == lSetVowels.end()) {
+							if (lSetVowels.size() == _K) {
+									lSetVowels.erase(ptrInputStr[*vecIdxVowels.begin()]);
+									vecIdxVowels.erase(vecIdxVowels.begin());
+									idxStart = *vecIdxVowels.begin() + 1;
+									vecIdxVowels.push_back(i);
+							} else {
+									lSetVowels.insert(x);
+									vecIdxVowels.push_back(i);
+							}
+					} 
+			} 
+
+			idxEnd++;
+	}
+
+	if (lSetVowels.size() == _K) {
+			retVal = idxEnd - idxStart + 1;
+	}
+
+	return (retVal);
 }
 
 int
 main (int argc, char *argv[])
 {
-  cout << "Enter the input string : ";
-  cin >> _INPUT_STR;
-  cout << endl;
-  uint strLen = _INPUT_STR.length();
-  char str[strLen];
-  strcpy(str, _INPUT_STR.c_str());
+	int output = 0;
 
-  cout << "Enter the value of '_K' : ";
-  cin >> _K;
-  cout << endl;
+	init();
 
-  uint pos1 = 0;
-  uint pos2 = 0;
-  uint diff = 0;
-  vPos_t V;
+	while (1) {
+		cout << endl << endl;
+		cout << "-------------------------------------------" << endl;
+		cout << "Enter input string : ";
+		cin >> _INPUT_STR;
+		cout << "Enter K : ";
+		cin >> _K;
 
-  for (uint i = 0; i < strLen; i++)
-  {
-    if (isVowel(str[i])) {
-      V.lPos = (i-1);
-      V.rPos = (i+1);
-      V.x = str[i];
-      vMapArr[getVIdxInMap(str[i])]++;
-      qVowels.push(V);
-    }
-    if (qVowels.size() > _K) {
-      V = qVowels.front();
-      pos1 = V.rPos;
-      pos2 = i;
-      vMapArr[getVIdxInMap(str[i])]--;
-      qVowels.pop();
-      if (isKDistVowels()) {
-        diff = (pos2 - pos1) + 1;
-        if (maxLength < diff) {
-          maxLength = diff;
-        }
-      }
-    }
-  }
+		ptrInputStr = new char[_INPUT_STR.size()];
+		strcpy(ptrInputStr, _INPUT_STR.c_str());
+		output = findKDistinctVowels(ptrInputStr, _INPUT_STR.size(), _K);
+		cout << "Longest substring with K distinct vowels is of lenght --> " << output << endl;
+	}
 
-  if (isKDistVowels()) {
-    V = qVowels.back();
-    if(V.rPos < (strLen - 1)) {
-      pos2 = (strLen - 1);
-    }
-    diff = (pos2 - pos1) + 1;
-    if (maxLength < diff) {
-      maxLength = diff;
-    }
-  }
-  
-
-  cout << "Longest substring having '_K' distinct vowels is : " << maxLength << endl;
-
-  return (0);
+	return (0);
 }

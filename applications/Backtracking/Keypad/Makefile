@@ -4,8 +4,8 @@
 PWD = $(shell pwd)
 
 # Header file path
-INCLUDES = -I$(PWD)/../../utils/ 				\
-	       -I$(PWD)/../../library/binarytree/ 	\
+INCLUDES = 	-I$(PWD)/../../library/utils/ 				\
+	       		-I$(PWD)/../../library/binarytree/ 	\
 
 # Library file path
 #LIB += $(PWD)/../../utils/MyTreeUtils.cpp
@@ -21,7 +21,12 @@ OBJ += $(patsubst %.cpp, %.o, $(SRC))
 
 EXEC = $(bin)
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -g -v $(INCLUDES)
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CXXFLAGS = -Wall -g -v -DDEBUG $(INCLUDES)
+else
+    CXXFLAGS = -Wall -g -v $(INCLUDES)
+endif
 
 $(EXEC): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(EXEC)

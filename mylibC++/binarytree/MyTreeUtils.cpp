@@ -379,8 +379,8 @@ MyTreeUtils::print_level_order (MyTreeNode *ptrRoot)
 	cout << "Printing in LevelOrder" << endl;
 
 	if (!ptrRoot) {
-		 cout << "Empty Tree" << endl;
-		 return;
+		cout << "Empty Tree" << endl;
+		return;
 	}	
 
 	height = getHeight(ptrRoot);

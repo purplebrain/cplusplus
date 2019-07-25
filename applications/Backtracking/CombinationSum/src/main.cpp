@@ -22,6 +22,16 @@ printVecPartialSum (int idxInput, vector<int>& vecPartial)
 }
 
 void
+init (void)
+{
+	gStats = 0;
+
+	if (gInputArr) {
+		delete [] gInputArr;
+	}
+}
+
+void
 processCombination (vector<int>& vecPartial)
 {
 	for (vector<int>::iterator itr = vecPartial.begin(); itr != vecPartial.end(); itr++) {
@@ -47,12 +57,11 @@ getPartialSum (vector<int>& vecPartial)
 
 bool
 isTargetMet (vector<int>& vecPartial) {
-	bool ret = false;
-	if (getPartialSum(vecPartial) == gTargetSum) {
-			ret = true;
-	}
-
-	return (ret);
+  if (getPartialSum(vecPartial) == gTargetSum) {
+    return (true);
+  } else {
+    return (false);
+  }
 }
 
 void
@@ -94,37 +103,34 @@ combinate (void)
 int
 main (int argc, char *argv[])
 {
-	cout << "Enter the size of the array : ";
-	cin >> gSizeInput;
-
-	gInputArr = new int[gSizeInput];
-
-	cout << "Enter the elements of the array : " << endl;
-	for (int i = 0; i < gSizeInput; i++) {
-		cout << "element-" <<  i << " : ";
-		cin >> gInputArr[i];
-	}	
-
   while (1) {
-		cout << endl << endl;
-    cout << "-----------------------------------------" << endl << endl;
+    cout << endl;
+    cout << "============================" << endl;
+    cout << "Enter the size of the array : ";
+    cin >> gSizeInput;
+    init();
+    gInputArr = new int[gSizeInput];
+    cout << "Enter the elements of the array : " << endl;
+    for (int i = 0; i < gSizeInput; i++) {
+      cout << "element-" <<  i << " : ";
+      cin >> gInputArr[i];
+    }	
     cout << "Input Array is : [";
     for (int j=0; j < gSizeInput; j++) {
-        cout << gInputArr[j] << " ";
+      cout << gInputArr[j] << " ";
     }
     cout << "]" << endl;
-
-		cout << "Enter a new Target Sum = ";
-		cin >> gTargetSum;
+    cout << "Enter a new Target Sum = ";
+    cin >> gTargetSum;
     gStats = 0;
 
     combinate();
 
-		if (gStats) {
-				cout << "There are " << gStats << " sets that meet gTargetSum" << endl;
-		} else {
-				cout << "No set of elements met gTargetSum" << endl;
-		}
+    if (gStats) {
+      cout << "There are " << gStats << " sets that meet gTargetSum" << endl;
+    } else {
+      cout << "No set of elements met gTargetSum" << endl;
+    }
   }
 
   return 0;
