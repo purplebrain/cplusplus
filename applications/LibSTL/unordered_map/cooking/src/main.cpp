@@ -8,49 +8,79 @@ int
 main(int argc, char *argv[])
 {
 	unordered_map<string, double> mapItems;
+	int inputChoice;
+	bool isExit = false;
+	string inputIngredient;
+	double inputQuantity;
+	double inputMaxLF;
 
-	{
-		cout << "Taking stock of ingredients.." << endl;
-
-		pair<string, double> pEgg("eggs", 6);
-		mapItems.insert(pEgg);
-
-		pair<string, double> pMilk("milk", 2.5);
-		mapItems.insert(pMilk);
-
-		pair<string, double> pBakPow("baking_powder", 4.0);
-		mapItems.insert(pBakPow);
-
-		mapItems.insert({"rum", 2});
-		mapItems.insert({"beer", 6});
-		mapItems.insert({"banana", 10});
-	}
-
-	cout << endl;
-	cout << "--- CAPACITY" << endl;
-	cout << "Max Map size : " << mapItems.max_size() << endl;
-	cout << "Max Bucket count : " << mapItems.max_bucket_count() << endl;
-	cout << "Max Load factor: " << mapItems.max_load_factor() << endl;
-
-	mapItems.max_load_factor(5.0);
-
-	cout << endl;
-	cout << "--- CURRENT VALUES" << endl;
-	cout << "Map size : " << mapItems.size() << endl;
-	cout << "Bucket count : " << mapItems.bucket_count() << endl;
-	cout << "Load factor: " << mapItems.max_load_factor() << endl;
-
-	cout << endl;
-	cout << "< Bucket Summary >" << endl;
-	for (uint i=0; i < mapItems.bucket_count(); i++) {
-			cout << endl;
-			cout << "Bucket #" << i << endl;
-			cout << "Size : " << mapItems.bucket_size(i) << endl;
-			cout << "Elements :";
-			for (auto itr = mapItems.begin(i); itr != mapItems.end(i); itr++) {
-					cout << "\t (" << itr->first << ", " << itr->second << ")";
+	while (1) {
+		cout << endl;
+		cout << "-------------------" << endl;
+		cout << "Enter your choice : " << endl;
+		cout << "(0) to exit" << endl;
+		cout << "(1) for Inserting new ingredient" << endl;
+		cout << "(2) for Deleting an ingredient" << endl;
+		cout << "(3) for Stats" << endl;
+		cout << "(4) for changing Max Load Factor" << endl;
+		cin >> inputChoice;
+		switch (inputChoice) {
+		case 0:
+			{
+				cout << "Exiting.." << endl;
+				isExit = true;
+				break;
 			}
-			cout << endl;
+		case 1:
+			{
+				cout << "Ingredient = "; cin >> inputIngredient;
+				cout << "Quantity = "; cin >> inputQuantity;
+				pair<string, double> pItem(inputIngredient, inputQuantity);
+				mapItems.insert(pItem);
+				break;
+			}
+		case 2:
+			cout << "Ingredient = "; cin >> inputIngredient;
+			if (mapItems.find(inputIngredient) != mapItems.end()) {
+				mapItems.erase(inputIngredient);
+			} else {
+				cout << "Ingredient " << inputIngredient << " not found" << endl;
+			}
+			break;
+		case 3:
+			cout << "#### STATS ####" << endl;
+			cout << "<CAPACITY>" << endl;
+			cout << "\tMax Map size : " << mapItems.max_size() << endl;
+			cout << "\tMax Bucket count : " << mapItems.max_bucket_count() << endl;
+			cout << "\tMax Load factor: " << mapItems.max_load_factor() << endl;
+			cout << "<CURRENT VALUES>" << endl;
+			cout << "\tMap size : " << mapItems.size() << endl;
+			cout << "\tBucket count : " << mapItems.bucket_count() << endl;
+			cout << "\tLoad factor: " << mapItems.max_load_factor() << endl;
+			cout << "<BUCKET ITEMS>" << endl;
+			for (uint i=0; i < mapItems.bucket_count(); i++) {
+					cout << "\tBucket #" << i << endl;
+					cout << "\t\tSize : " << mapItems.bucket_size(i) << endl;
+					cout << "\t\tElements :";
+					for (auto itr = mapItems.begin(i); itr != mapItems.end(i); itr++) {
+							cout << "\t (" << itr->first << ", " << itr->second << ")";
+					}
+					cout << endl;
+			}
+			break;		
+		case 4:
+			cout << "Max Load Factor = "; cin >> inputMaxLF;
+			mapItems.max_load_factor(inputMaxLF);
+			break;
+		default:
+			{
+				cout << "Enter a valid choice" << endl;
+				break;
+			}
+		}
+		if (isExit) {
+			break;
+		}
 	}
 
 	cout << endl;

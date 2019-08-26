@@ -72,31 +72,44 @@ isConstraintSatisfied (vector<int>& vecPartial)
 }
 
 void
-permutate (int idx, set<int> setPartial, vector<int> vecPartial)
+permutate (int cur_idx, set<int> setPartial, vector<int> vecPartial)
 {
 	// [ EXIT CONDITION ]
-  if (idx >= gSizeInput) {
+  if (cur_idx >= gSizeInput) {
     return;
   }
 
 	// [ UPDATE PARTIALS ]
-  vecPartial.push_back(gInputArr[idx]);
-  setPartial.insert(idx);
+  vecPartial.push_back(gInputArr[cur_idx]);
+  setPartial.insert(cur_idx);
 
 	// [ CONSTRAINT CHECK ]
   if (isConstraintSatisfied(vecPartial)) {
-    // SUCCESS
+    // SUCCESS! PROBLEM SOLVED 
+    // (go exit gracefully)
     return;
 	} else {
-    // FAILURE (go to next state)
-    // CONDITION CHECK TO PICK NEXT STATE
-		for (int i = 0; i < gSizeInput; i++) {
-			if (setPartial.find(i) == setPartial.end()) {
-        // GO TO NEXT STATE
-				permutate(i, setPartial, vecPartial);
-			}
+    // FAILURE! 
+    // (go to next state)
+		for (int next_idx = 0; next_idx < gSizeInput; next_idx++) {
+      // CONDITION CHECK TO PICK NEXT STATE FROM THE LIST OF
+      // NEXT_STATE(s) OF THE CURRENT_STATE.
+			if (setPartial.find(next_idx) == setPartial.end()) {
+        // VALID NEXT STATE (so considering)
+				permutate(next_idx, setPartial, vecPartial);
+			} else {
+        // INVALID NEXT STATE (so pruning)
+        continue;
+      }
 		} 
 	}
+
+  // [ BACKTRACK ]
+  // (If here, it means that none of the next_state(s) of
+  // of the current_state is valid. So we have to backtrack
+  // from the current_state itself.)
+  vecPartial.pop_back();
+  setPartial.erase(cur_idx);
 }
 
 void
@@ -105,8 +118,8 @@ permutate (void)
   set<int> setPartial;
   vector<int> vecPartial;
   // [ LOOP OVER BASE STATES ]
-  for (int idx = 0; idx < gSizeInput; idx++) {
-    permutate(idx, setPartial, vecPartial);
+  for (int base_idx = 0; base_idx < gSizeInput; base_idx++) {
+    permutate(base_idx, setPartial, vecPartial);
   }
 
   return;

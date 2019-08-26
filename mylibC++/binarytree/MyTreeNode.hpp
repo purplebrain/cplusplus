@@ -17,6 +17,10 @@ class MyTreeNode
     	int data;
     	MyTreeNode *ptrLeft;
     	MyTreeNode *ptrRight;
+      int height;
+      int maxSubTreeValue;
+      int minSubTreeValue;
+      int secretNum;
     public:
 			// Constructor
     	MyTreeNode (int value)
@@ -24,6 +28,10 @@ class MyTreeNode
     	    this->data = value;
     	    this->ptrLeft = NULL;
     	    this->ptrRight = NULL;
+          this->height = 1;
+          this->maxSubTreeValue = value;
+          this->minSubTreeValue = value;
+          this->secretNum = 0;
     	}
 
 			// Destructor

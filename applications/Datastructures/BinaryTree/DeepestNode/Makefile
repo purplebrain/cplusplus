@@ -4,10 +4,14 @@
 PWD = $(shell pwd)
 
 # Header file path
-# (none)
+INCLUDES =  -I$(PWD)/../../../../mylibC++/BinaryTree/ \
+						-I$(PWD)/../../../../mylibC++/Stack/ \
 	       
 # Library file path
-# (none)
+LIB += $(PWD)/../../../../MyLibC++/BinaryTree/MyTreeUtils.cpp
+LIB += $(PWD)/../../../../MyLibC++/BinaryTree/MyBinTree.cpp
+LIB += $(PWD)/../../../../MyLibC++/BinaryTree/MyBinSearchTree.cpp
+LIB += $(PWD)/../../../../MyLibC++/Stack/MyStackTreeNode.cpp
 
 # Source file path 
 SRC_PATH :=$(PWD)/src

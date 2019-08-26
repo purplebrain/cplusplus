@@ -23,7 +23,7 @@ int gSizeGrp;
 int gStats = 0;
 
 void combinate (void);
-void combinate(int idxInput, vector<int> vecPartial);
+void combinate (int idxInput, vector<int> vecPartial);
 
 void
 init (void)
@@ -74,36 +74,45 @@ isConstraintSatisfied (vector<int>& vecPartial)
 }
 
 void
-combinate(int idx, vector<int> vecPartial)
+combinate (int cur_idx, vector<int> vecPartial)
 {
 	// [ EXIT CONDITION ]
-  if (idx >= gSizeInput) {
+  if (cur_idx >= gSizeInput) {
     return;
   }
 
 	// [ UPDATE PARTIALS ]
-  vecPartial.push_back(gInputArr[idx]);
+  vecPartial.push_back(gInputArr[cur_idx]);
 
 	// [ CONSTRAINT CHECK ]
   if (isConstraintSatisfied(vecPartial)) {
-    // SUCCESS
+    // SUCCESS! PROBLEM SOLVED 
+    // (go exit gracefully)
     return;
   } else {
-    // FAILURE (go to next state)
-    // CONDITION CHECK TO PICK NEXT STATE (none for this problem)
-    for (int i = idx; i < gSizeInput; i++) {
-      // GO TO NEXT STATE
-      combinate(i+1, vecPartial);
+    // FAILURE! 
+    // (go to next state)
+    for (int next_idx = cur_idx; next_idx < gSizeInput; next_idx++) {
+      // CONDITION CHECK TO PICK NEXT STATE FROM THE LIST OF
+      // NEXT_STATE(s) OF THE CURRENT_STATE.
+      combinate(next_idx+1, vecPartial);
     }
   }
+
+  // [ BACKTRACK ]
+  // (If here, it means that none of the next_state(s) of
+  // of the current_state is valid. So we have to backtrack
+  // from the current_state itself.)
+  vecPartial.pop_back();
 }
  
 void
 combinate (void)
 {
 	vector<int> vecPartial;
-	for (int idx = 0; idx < gSizeInput; idx++) {
-			combinate(idx, vecPartial);
+  // [ LOOP OVER BASE STATES ]
+	for (int base_idx = 0; base_idx < gSizeInput; base_idx++) {
+			combinate(base_idx, vecPartial);
 	}
 }
 

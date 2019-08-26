@@ -25,6 +25,7 @@ cleanup (void)
 void
 init (void)
 {
+  gInputArr = new unsigned int[gInputSize];
   gArrMemoize = new bool*[gInputSize+1];
   for (int i = 0; i < (gInputSize+1); i++) {
     gArrMemoize[i] = new bool[gInputSum+1];
@@ -78,7 +79,6 @@ main (int argc, char *argv[])
     cout << "======================" << endl;
     cout << "Enter the size of the array : ";
     cin >> gInputSize;
-    gInputArr = new unsigned int[gInputSize];
     init();
     cout << "Enter the elements of the array : " << endl;
     for (int i = 0; i < gInputSize; i++) {

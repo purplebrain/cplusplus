@@ -17,26 +17,25 @@ using namespace std;
 //
 class MyBinTree
 {
-    public:
-      int Tsize;
-      MyTreeNode *ptrRoot;
-    public:
-      // Constructor
-      MyBinTree()
-      {
-        this->Tsize = 0;
-        this->ptrRoot = NULL;
-      }
+  public:
+    int Tsize;
+    MyTreeNode *ptrRoot;
+  public:
+    // Constructor
+    MyBinTree()
+    {
+      this->Tsize = 0;
+      this->ptrRoot = NULL;
+    }
 
-      // Destructor
-      ~MyBinTree() =default;
+    // Destructor
+    ~MyBinTree() =default;
 
-    // Other Methods
-    private:
-      MyTreeNode * insert_helper (MyTreeNode **ptrNode, int value);
-    public:
-      void insert (int value);
-
+  // Other Methods
+  private:
+    MyTreeNode * insert_helper (MyTreeNode **ptrNode, int value);
+  public:
+    void insert (int value);
 };
 
 #endif // __MY_BIN_TREE_HPP

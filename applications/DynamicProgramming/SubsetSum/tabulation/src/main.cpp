@@ -17,6 +17,7 @@ bool **gArrTabulate;
 void
 init (void)
 {
+  gInputArr = new unsigned int[gInputSize];
   gArrTabulate = new bool*[gInputSize+1];
   for (int i = 0; i < (gInputSize+1); i++) {
     gArrTabulate[i] = new bool[gInputSum+1];
@@ -28,6 +29,7 @@ init (void)
 void
 cleanup (void)
 {
+  delete [] gInputArr;
   for (int i = 0; i < (gInputSize+1); i++) {
     delete [] gArrTabulate[i];
   }
@@ -67,7 +69,6 @@ main (int argc, char *argv[])
     cout << "==========================" << endl;
     cout << "Enter size of input array : ";
     cin >> gInputSize;
-    gInputArr = new unsigned int[gInputSize];
     init(); 
     cout << "Enter the elements of the array : " << endl;
     for (int i = 0; i < gInputSize; i++) {
@@ -88,7 +89,6 @@ main (int argc, char *argv[])
       cout << "Subset sum not found" << endl;
     }
 
-    delete [] gInputArr;
     cleanup();
   }
 

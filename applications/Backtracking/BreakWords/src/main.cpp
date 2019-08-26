@@ -53,12 +53,14 @@ isWordInDict (string& strPartialWord)
 void
 breakWords (string strPartialRemainingPhrase, vector<string> vecPartialWordList)
 {
+	// [ EXIT CONDITION ]
   if ((strPartialRemainingPhrase.size() == 0) && 
       vecPartialWordList.size()) {
     printResult(vecPartialWordList);
     return;
   }
 
+	// [ UPDATE PARTIALS ]
   string strPartialWord;
   for (int i = 0; i < strPartialRemainingPhrase.size(); i++) {
     strPartialWord.insert(strPartialWord.size(), 1, strPartialRemainingPhrase[i]);
@@ -82,9 +84,10 @@ void
 breakWords (void) 
 {
   vector<string> vecPartialWordList;
-  string strPartialWord;
+  //  [ LOOP OVER BASE STATES ]
+  //  (there is nothing to loop over in this problem, instead pass the 
+  //  entire input as the base_state).
   breakWords(gStrInputPhrase, vecPartialWordList);
-
   return;
 }
 

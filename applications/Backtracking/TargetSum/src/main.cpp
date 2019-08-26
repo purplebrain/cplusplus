@@ -8,8 +8,8 @@ int gSizeInput;
 int gTargetSum;
 int gStats = 0;
 
-void combinate (void);
-void combinate(int idxInput, vector<int> vecPartial);
+void target_sum (void);
+void target_sum (int idxInput, vector<int> vecPartial);
 
 void
 printVecPartialSum (int idxInput, vector<int>& vecPartial)
@@ -85,33 +85,46 @@ isConstraintSatisfied (vector<int>& vecPartial)
 }
 
 void
-combinate(int idx, vector<int> vecPartial)
+target_sum (int cur_idx, vector<int> vecPartial)
 {
-  // When no more elements are there to put in vecPartial[]
-  if (idx >= gSizeInput) {
+	// [ EXIT CONDITION ]
+  if (cur_idx >= gSizeInput) {
     return;
   }
 
-  // Update partial sum
-  vecPartial.push_back(gInputArr[idx]);
+	// [ UPDATE PARTIALS ]
+  vecPartial.push_back(gInputArr[cur_idx]);
   //printVecPartialSum(idxInput, vecPartial);
 
-  // Constraint check
+	// [ CONSTRAINT CHECK ]
   if (isConstraintSatisfied(vecPartial)) {
+    // SUCCESS! PROBLEM SOLVED 
+    // (go exit gracefully)
     return;
+  } else {
+    // FAILURE! 
+    // (go to next state)
+    for (int next_idx = cur_idx; next_idx < gSizeInput; next_idx++) {
+      // CONDITION CHECK TO PICK NEXT STATE FROM THE LIST OF
+      // NEXT_STATE(s) OF THE CURRENT_STATE.
+      target_sum(next_idx+1, vecPartial);
+    }
   }
 
-  for (int i = idx; i < gSizeInput; i++) {
-    combinate(i+1, vecPartial);
-  }
+  // [ BACKTRACK ]
+  // (If here, it means that none of the next_state(s) of
+  // of the current_state is valid. So we have to backtrack
+  // from the current_state itself.)
+  vecPartial.pop_back();
 }
  
 void
-combinate (void)
+target_sum (void)
 {
 	vector<int> vecPartial;
-	for (int idx = 0; idx < gSizeInput; idx++) {
-			combinate(idx, vecPartial);
+  // [ LOOP OVER BASE STATES ]
+	for (int base_idx = 0; base_idx < gSizeInput; base_idx++) {
+			target_sum(base_idx, vecPartial);
 	}
 }
 
@@ -139,7 +152,7 @@ main (int argc, char *argv[])
     cin >> gTargetSum;
     gStats = 0;
 
-    combinate();
+    target_sum();
 
     if (gStats) {
       cout << "There are " << gStats << " sets that meet gTargetSum" << endl;
