@@ -2,7 +2,7 @@
   < PROBLEM STATEMENT >
 		Print all permutations of a given string and group size.
 		NOTE:
-    In Permutation, order doesn't matter.
+    In Permutation, order matters.
     So,
       [1, 2, 3]
       [2, 3, 1]

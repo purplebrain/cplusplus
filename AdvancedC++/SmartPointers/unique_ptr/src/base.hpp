@@ -24,7 +24,11 @@ class BASE
 
         // < COPY ASSIGNMENT OPERATOR >
         BASE& operator=(const BASE& rhs);
+
+        // OPERATOR OVERLOADING
         bool operator==(const BASE& rhs);
+
+        // METHODS
         void printContent(void);
 };
 
