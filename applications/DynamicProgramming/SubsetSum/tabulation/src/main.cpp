@@ -27,6 +27,18 @@ init (void)
 }
 
 void
+printTabArr (void)
+{
+	cout << "\nTABULATE ARRAY" << endl;
+	for (int i = 0; i < gInputSize+1; i++) {
+		cout << "\n";
+		for (int j = 0; j < gInputSum+1; j++) {
+			cout << " " << gArrTabulate[i][j];
+		}
+	}
+}
+
+void
 cleanup (void)
 {
   delete [] gInputArr;
@@ -47,11 +59,11 @@ isSubsetSum (unsigned int N, int SUM_LEFT)
       } else if ((j != 0) && (i == 0)) {
         // BASE CONDITION (if sum-left is non-zero and nothing in input-set)
         gArrTabulate[i][j] = false;
-      } else if (j < gInputArr[i-1]) {
-        // GENERIC CONDITION (based on Recursive Formula)
+      } else if (gInputArr[i-1] > j) {
+        // If the array-member is greater than the sum-left
         gArrTabulate[i][j] = gArrTabulate[i-1][j];
-      } else if (j >= gInputArr[i-1]) {
-        // GENERIC CONDITION (based on Recursive Formula)
+      } else if (gInputArr[i-1] <= j) {
+        // If the array-member is less than or equal to the sum-left
         gArrTabulate[i][j] = gArrTabulate[i-1][j] || 
                              gArrTabulate[i][j-gInputArr[i-1]];  
       }
@@ -67,9 +79,11 @@ main (int argc, char *argv[])
   while(1) {
     cout << endl;
     cout << "==========================" << endl;
+    cout << "Enter the of 'subset-sum' : ";
+    cin >> gInputSum;
     cout << "Enter size of input array : ";
     cin >> gInputSize;
-    init(); 
+		init();
     cout << "Enter the elements of the array : " << endl;
     for (int i = 0; i < gInputSize; i++) {
       cout << "element-" <<  i << " : ";
@@ -80,15 +94,14 @@ main (int argc, char *argv[])
       cout << gInputArr[j] << " ";
     }
     cout << "]" << endl;
-    cout << "Enter the of 'subset-sum' : ";
-    cin >> gInputSum;
 
     if (isSubsetSum(gInputSize, gInputSum)) {
       cout << "Subset sum found" << endl;
     } else {
       cout << "Subset sum not found" << endl;
     }
-
+		
+		printTabArr();
     cleanup();
   }
 

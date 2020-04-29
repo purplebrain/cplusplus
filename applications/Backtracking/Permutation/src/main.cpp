@@ -48,11 +48,6 @@ init (void)
 void
 processPermutation (vector<int>& vecPartial)
 {
-	for (vector<int>::iterator itr = vecPartial.begin(); itr != vecPartial.end(); itr++) {
-			cout << *itr << " ";
-	}	
-	cout << endl;
-	gStats++;
 
   return;
 }
@@ -84,25 +79,29 @@ permutate (int cur_idx, set<int> setPartial, vector<int> vecPartial)
   setPartial.insert(cur_idx);
 
 	// [ CONSTRAINT CHECK ]
-  if (isConstraintSatisfied(vecPartial)) {
-    // SUCCESS! PROBLEM SOLVED 
+  if (vecPartial.size() == gSizeGrp) {
+    // SATISFIED
     // (go exit gracefully)
-    return;
-	} else {
-    // FAILURE! 
+	  for (vector<int>::iterator itr = vecPartial.begin(); itr != vecPartial.end(); itr++) {
+	  		cout << *itr << " ";
+	  }	
+	  cout << endl;
+	  gStats++;
+  } else {
+    // NOT SATISFIED
     // (go to next state)
-		for (int next_idx = 0; next_idx < gSizeInput; next_idx++) {
+	  for (int next_idx = 0; next_idx < gSizeInput; next_idx++) {
       // CONDITION CHECK TO PICK NEXT STATE FROM THE LIST OF
       // NEXT_STATE(s) OF THE CURRENT_STATE.
-			if (setPartial.find(next_idx) == setPartial.end()) {
+	  	if (setPartial.find(next_idx) == setPartial.end()) {
         // VALID NEXT STATE (so considering)
-				permutate(next_idx, setPartial, vecPartial);
-			} else {
+	  		permutate(next_idx, setPartial, vecPartial);
+	  	} else {
         // INVALID NEXT STATE (so pruning)
         continue;
       }
-		} 
-	}
+	  } 
+  }
 
   // [ BACKTRACK ]
   // (If here, it means that none of the next_state(s) of

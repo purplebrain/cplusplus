@@ -64,7 +64,7 @@ CoinChange (unsigned int COINS, unsigned int CHANGE_LEFT)
         gArrTabulate[coin][cLeft] = gArrTabulate[coin-1][cLeft];
       } else if (cLeft == gInputArrCoins[coin-1]) {
         // GENERIC CONDITION (based on Recursive Formula)
-        gArrTabulate[coin][cLeft] = gArrTabulate[coin-1][cLeft] + 1;
+        gArrTabulate[coin][cLeft] = 1 + gArrTabulate[coin-1][cLeft];
       } else if (cLeft > gInputArrCoins[coin-1]) {
         // GENERIC CONDITION (based on Recursive Formula)
         gArrTabulate[coin][cLeft] = gArrTabulate[coin][cLeft - gInputArrCoins[coin-1]]
